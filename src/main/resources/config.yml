@@ -1,0 +1,9 @@
+MapBlock: true
+MapBlockLore: 
+  Enable: true
+  String: 'Map*'
+BannerBlock: true
+EggBlock: true
+OtherBlock:
+  Enable: true
+  String: 'LockMe'

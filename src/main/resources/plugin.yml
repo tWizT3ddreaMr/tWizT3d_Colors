@@ -1,0 +1,17 @@
+name: tWizT3dColors
+author: tWizT3d_dreaMr
+version: 1.4.3.11
+main: me.tWizT3d_dreaMr.colors.main
+commands:
+   colorme:
+      description: Sets your color code
+      usage: colorme <code> <hex>
+   colors:
+      description: Sets your color code
+      usage: colorme <code> <hex>
+   color:
+      description: Sets your color code
+      usage: colorme <code> <hex>
+api-version: 1.16
+depend:
+   [ PlaceholderAPI ]
