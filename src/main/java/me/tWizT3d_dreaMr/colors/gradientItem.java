@@ -68,6 +68,10 @@ public class gradientItem {
 	List<String> lore=item.getItemMeta().getLore();
 
 	for(String hx:grabass) {
+		if(hx.length()!=6) {
+			Bukkit.getLogger().log(Level.SEVERE, "hex "+hx+" malformed");
+			continue;
+		}
 		lore.set(locl,ChatColor.of("#"+hx)+ChatColor.stripColor(lore.get(locl)));
 		locl++;
 	}
@@ -113,10 +117,16 @@ public class gradientItem {
 		
 		if(hr.length()==1)
 			hr="0"+hr;
+		else if(hr.length()==3)
+			hr="ff";
 		if(hg.length()==1)
 			hg="0"+hg;
+		else if(hg.length()==3)
+			hg="ff";
 		if(hb.length()==1)
 			hb="0"+hb;
+		else if(hb.length()==3)
+			hb="ff";
 		
 		String hex=hr+hg+hb;
 		graout.add(hex);
