@@ -2,9 +2,11 @@ package me.tWizT3d_dreaMr.colors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -32,31 +34,36 @@ public class gradientItem {
 	Integer loc2=0;
 	ArrayList<String> hexes=new ArrayList<String>();
 	for(int i=0;i<args.length;i++) {
-		if(i<2) {
-			
-			if(i==0)loc1=Integer.parseInt(args[i].replaceAll("[^0-9]", ""))-1;
-			if(i==1)loc2=Integer.parseInt(args[i].replaceAll("[^0-9]", ""))-1;
-		}else {
+		if(i>1) {
+
 			if(!ishex(args[i])) {
-				p.sendMessage(ChatColor.RED+"Args error arg "+i);
+				p.sendMessage(ChatColor.RED+"Args error arg "+i);//
 				return;
 			}
 			else {
 				hexes.add(args[i]);
 			}
+		}else {
+			if(i==0)loc1=Integer.parseInt(args[i].replaceAll("[^0-9]", ""))-1;
+			if(i==1)loc2=Integer.parseInt(args[i].replaceAll("[^0-9]", ""))-1;
 		}
 	}
 	Integer loch=Math.max(loc1, loc2);
 	Integer locl=Math.min(loc1, loc2);
 	if(item.getItemMeta().getLore().size()<(loch+1)) {
-		p.sendMessage(ChatColor.RED+"Lore not long enough");
+		p.sendMessage(ChatColor.RED+"Lore not long enough");//check
 		return;
 	}
 	int dif=loch-locl+2;
 	int garsize=dif/(hexes.size()-1);
 	ArrayList<String> grabass=new ArrayList<String>();
 	for(int n=0;n<(hexes.size()-1);n++) {
-		grabass.addAll(GraMe(hexes.get(n),hexes.get(n+1),garsize));
+		ArrayList<String> temp=GraMe(hexes.get(n),hexes.get(n+1),garsize);
+		if(temp == null) {
+			p.sendMessage(ChatColor.RED+"H1 or H2 null");//in lang
+			return;
+		}
+		grabass.addAll(temp);
 	}
 	List<String> lore=item.getItemMeta().getLore();
 
@@ -69,7 +76,7 @@ public class gradientItem {
 	item.setItemMeta(im);
 	p.getInventory().setItemInMainHand(item);
 	p.updateInventory();
-	p.sendMessage(ChatColor.GREEN+"Your lore has been updated.");
+	p.sendMessage(ChatColor.GREEN+"Your lore has been updated.");	//(conf,"Grad","Success","&aYour lore has been updated.");
 	}
 	
 	
@@ -77,7 +84,16 @@ public class gradientItem {
 	ArrayList<String> graout=new ArrayList<String>();
 
 	h1=h1.replace("#", "");
+	h1=h1.replace("&", "");
 	h2=h2.replace("#","");
+	h2=h2.replace("&","");
+	if(h1.length()!=6) {
+		Bukkit.getLogger().log(Level.SEVERE, "h1 not right length: "+h1);
+		return null;
+	}if(h2.length()!=6) {
+		Bukkit.getLogger().log(Level.SEVERE, "h2 not right length: "+h2);
+		return null;
+	}
 	int h1r=Integer.parseInt(h1.substring(0, 2),16);
 	int h1g=Integer.parseInt(h1.substring(2, 4),16);
 	int h1b=Integer.parseInt(h1.substring(4),16);

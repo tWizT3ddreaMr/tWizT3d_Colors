@@ -44,9 +44,14 @@ private static FileConfiguration defaultSet(FileConfiguration conf) {
 	//General
 	conf=set(conf,"General","NoPerms","&cYou do not have permission to perform this command");
 	conf=set(conf,"General","NonSupportedSender","&cCommandSender not supported");
-	conf=set(conf,"General","Incorrect","&cIncorrect Usage");
 	conf=set(conf,"General","Reload","&8Reloaded tWizT3dColors Configs");
-	conf=set(conf,"General","Sleep","&3Your sleep timer has been reset");
+	conf=set(conf,"General","ArgsLong","&cLength too long");
+	conf=set(conf,"General","ArgsShort","&cLength too short");
+	conf=set(conf,"General","Incorrect","&cIncorrect Usage");
+	conf=set(conf,"Grad","Success","&aYour lore has been updated.");
+	conf=set(conf,"Grad","NoItem","&cGet an item first dummy");
+	conf=set(conf,"Grad","NoLore","&chas no lore my dude");
+	conf=set(conf,"Grad","h1h2","&cH1 or H2 null");
 	
 	conf.options().copyDefaults(true);
 return conf;
