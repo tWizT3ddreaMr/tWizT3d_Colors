@@ -184,7 +184,28 @@ return ColorfyNP("&"+s);
 }
 public static String ColorfyChat(String message,Player p) {
 	for(String[]ad:colors) {
-		if(p.hasPermission("tc.chat."+ad[0]))
+		if(!p.hasPermission("tc.chat."+ad[0]))
+			continue;
+		String code="&"+ad[0];
+		String hex=ad[1];
+		ChatColor cc;
+		if(hex.equalsIgnoreCase("random"))
+			cc=r();
+		else
+			cc=ChatColor.of("#"+hex);
+
+			while(message.contains(code)) {
+				if(hex.equalsIgnoreCase("random")) {
+					message=message.replaceFirst(code, ""+cc);
+					cc=r();
+				} else {
+					message=message.replace(code, ""+cc);}
+			}
+	}
+	return message;
+}public static String ColorfySign(String message,Player p) {
+	for(String[]ad:colors) {
+		if(!p.hasPermission("tc.sign."+ad[0]))
 			continue;
 		String code="&"+ad[0];
 		String hex=ad[1];
@@ -205,7 +226,7 @@ public static String ColorfyChat(String message,Player p) {
 	return message;
 }public static String ColorfyAnvil(String message,Player p) {
 	for(String[]ad:colors) {
-		if(p.hasPermission("tc.anvil."+ad[0]))
+		if(!p.hasPermission("tc.anvil."+ad[0]))
 			continue;
 		String code="&"+ad[0];
 		String hex=ad[1];
@@ -268,7 +289,7 @@ public static String Colorfyexclamation(String message) {
 public static String ColorfyCommandP(String message, Player p, String Command) {
 	if(Command.equalsIgnoreCase("setcolor")) {return message;}
 	for(String[]ad:colors) {
-		if(p.hasPermission("tc.command."+ad[0]))
+		if(!p.hasPermission("tc.command."+ad[0]))
 			continue;
 		
 	String code="&"+ad[0];

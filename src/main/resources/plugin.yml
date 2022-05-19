@@ -1,17 +1,39 @@
 name: tWizT3dColors
 author: tWizT3d_dreaMr
-version: 1.4.3.11
+version: 1.4.5.2
 main: me.tWizT3d_dreaMr.colors.main
+api-version: 1.16
 commands:
    colorme:
       description: Sets your color code
       usage: colorme <code> <hex>
-   colors:
-      description: Sets your color code
-      usage: colorme <code> <hex>
+   setcolor:
+      description: change your chat color
+      usage: setcolor <colorcode>
    color:
-      description: Sets your color code
-      usage: colorme <code> <hex>
-api-version: 1.16
+      description: Sets your color list
+      usage: setcolor <server> list
+   colors:
+      description: list of colors
+      usage: colors
+   grad:
+      description: sets gradient
+      usage: grad <start line> <End line> [hex 2x]
+permissions:
+    Colorme.set.self:
+        description: allows the user to change thier own settings
+        default: op
+    Colorme.set.server:
+        description: allows the user to change server settings
+        default: op
+    Colorme.h.Chat:
+        description: allows the user to change server settings
+        default: op
+    Colorme.h.Command:
+        description: allows the user to use &h
+        default: op
+    Colorme.h.Anvil:
+        description: allows the user to change server settings
+        default: op
 depend:
    [ PlaceholderAPI ]

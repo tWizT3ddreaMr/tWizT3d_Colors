@@ -14,8 +14,15 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class ChatGui {
 public static void Command(Player p) {
-	p.sendMessage(ChatColor.DARK_AQUA+"Your Chat Color");
+	if(p.hasPermission("tc2.can")) {p.spigot().sendMessage(fin());}
+	p.sendMessage(ChatColor.DARK_AQUA+"Click on a color below to set your chat color.");
 	p.sendMessage(ChatColor.DARK_GRAY+"--------------------------------");
+
+	if(!p.hasPermission("tc2.can")) {
+		p.spigot().sendMessage(fin());
+		p.sendMessage(ChatColor.DARK_GRAY+"--------------------------------");
+		return;
+		}
 		TextComponent Builder=new TextComponent("");
 		int i=0;
 		List<String> color=new ArrayList<String>();
@@ -30,7 +37,7 @@ public static void Command(Player p) {
 				Builder=new TextComponent("");
 				i=0;
 			}
-			if(p.hasPermission("tc.chat."+col)) {
+			if(p.hasPermission("tc2.chat."+col)) {
 				if(i!=0) {
 					Builder.addExtra(new TextComponent(ChatColor.GRAY+", "));
 				}
@@ -51,7 +58,7 @@ public static void Command(Player p) {
 				Builder=new TextComponent("");
 				i=0;
 			}
-			if(p.hasPermission("tc.chat."+col[0])) {
+			if(p.hasPermission("tc2.chat."+col[0])) {
 				if(i!=0)
 				Builder.addExtra(new TextComponent(ChatColor.GRAY+", "));
 				if(col[1].equalsIgnoreCase("random")) {
@@ -72,18 +79,18 @@ public static TextComponent MessageBuilder(String Message,String hex,String colo
 	TextComponent message = new TextComponent(Message);
 	if(!hex.isEmpty())
 		message.setColor(ChatColor.of("#"+hex));
-	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/color set "+color ) );
+	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor set "+color ) );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( colorFile.Colorfyexclamation("!b")+"Set your chat to this color" ) ) );
 	return message;
 	}
 public static TextComponent MessageBuilder2(String Message,String color) {
 	TextComponent message = new TextComponent(Message);
-	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/color set "+color ) );
+	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor set "+color ) );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( colorFile.Colorfyexclamation("!"+color)+"Set your chat to this color" ) ) );
 	return message;
 }public static TextComponent fin() {
 	TextComponent message = new TextComponent(ChatColor.RED+"Remove");
-	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/color remove") );
+	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor remove") );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( "Remove your chat color" ) ) );
 	return message;
 }

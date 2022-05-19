@@ -18,6 +18,7 @@ import net.md_5.bungee.api.ChatColor;
    public static Set<String> pinatas;
 public void onEnable()
 {	LangHandler.enable();
+	colorConfig.enable();
 	config = getConfig();
 	config.options().copyDefaults(true);
     saveConfig();
@@ -27,8 +28,9 @@ public void onEnable()
 		colorFile.enable();
 		me.tWizT3d_dreaMr.colors.configHandler.enable();
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
-	     Bukkit.getPluginManager().registerEvents(new AnvilRoname(), this);
-             Bukkit.getPluginManager().registerEvents(new command(), this);
+	    Bukkit.getPluginManager().registerEvents(new AnvilRoname(), this);
+        Bukkit.getPluginManager().registerEvents(new command(), this);
+        Bukkit.getPluginManager().registerEvents(new signHandler(), this);
 	
 	    
 		config.options().copyDefaults(true);
@@ -42,6 +44,22 @@ public List<String> onTabComplete(CommandSender sender , Command cmd, String Com
 	return null;
 }
 public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	 if (command.getName().equalsIgnoreCase("grad"))
+	    { 
+	      if (sender instanceof Player)
+	      {
+	    	  if(!sender.hasPermission("Colorme.Grad")) {
+
+		    	sender.sendMessage(LangHandler.get("General","NoPerms",null,null));
+	    		  return true;
+	    	  }
+	    	  gradientItem.comgra((Player)sender, args);
+	    	  return true;
+	      }else {
+	    	  sender.sendMessage(LangHandler.get("General","Incorrect",null,null));
+	    	  return true;
+	      }
+	    }
 		  if (command.getName().equalsIgnoreCase("colorme"))
 		    { 
 		      if (sender instanceof Player)
@@ -77,7 +95,7 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
 			  }
 			  return true;
 		  
-    }		  if(command.getName().equalsIgnoreCase("color")) {
+    }		  if(command.getName().equalsIgnoreCase("setcolor")) {
 		  if(sender instanceof Player) {
 			 Player p=(Player)sender;
 			 if(args.length==0) {
@@ -88,24 +106,69 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
 					 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix \"\"");
 					 p.sendMessage(ChatColor.RED+"You have removed your color");
 					 return true;
-				 }
+				 } 
 			 }
 			 if(args.length==2) {
 				 if(args[0].equalsIgnoreCase("set")) {
 					 if(colorFile.isColorCodend(args[1])) {
-					 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix !"+args[1]);
-					 p.sendMessage(colorFile.Colorfyexclamation("!bYou have set your chatcolor to !"+args[1]+"this color"));return true;}
-					 else {p.sendMessage(ChatColor.RED+"That is not a color");return true;}
+						 if(!p.hasPermission("tc2.color."+args[1])) {
+							 p.sendMessage(colorFile.Colorfyexclamation("!cYou cannot set your color to !"+args[1]+"this color"));
+							 return true;
+						 }
+						 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix !"+args[1]);
+						 p.sendMessage(colorFile.Colorfyexclamation("!bYou have set your chatcolor to !"+args[1]+"this color"));return true;}
+					 	else {p.sendMessage(ChatColor.RED+"That is not a color");return true;}
 				 }
 			 }
 		  }
 		  else {
 			  sender.sendMessage("no");return true;
-		  }
-		  sender.sendMessage(ChatColor.RED+"Error in your syntax");
-		  return true;
+		  }}if ((command.getName().equalsIgnoreCase("color")) && ((sender instanceof Player))) {
+				
+				if(!(((Player)sender).hasPermission("Colorme.set.self")||((Player)sender).hasPermission("Colorme.set.server"))) {
+					((Player)sender).sendMessage(LangHandler.get("General","NoPerms",null,null));
+					return true;}
+				
+			
+			if(args.length==0||args[0]==null) {
+				sender.sendMessage(LangHandler.get("General","Incorrect",null,null));
+				return true;
+			}
+			if(args[0].equalsIgnoreCase("server")&&((Player)sender).hasPermission("Colorme.set.server")) {
+				int i=1;
+				if(args.length<1) {return true;}
+				String Endgame="";
+				while(args.length>i) {
+					Endgame=Endgame+args[i]+" ";
+					i++;
+					
+				}
+			    Player p = (Player)sender;
+				p.sendMessage(LangHandler.get("ColorMe", "Set.Server","colors",Endgame));
+			      me.tWizT3d_dreaMr.colors.colorConfig.setColorserv(Endgame.toLowerCase());
+		           saveConfig();return true;
+			}
+		      Player p = (Player)sender;int i=0;
+				String Endgame="";
+				while(args.length>i) {
+					Endgame=Endgame+args[i]+" ";
+					i++;
+					
+				}
+				if(args[0].equalsIgnoreCase("clear")&&((Player)sender).hasPermission("Colorme.set.self")) {
+			    		p.sendMessage(LangHandler.get("ColorMe", "Clear.Self",null,Endgame));
+					      me.tWizT3d_dreaMr.colors.colorConfig.removeColor(p);
+				           saveConfig();return true;
+			      }
+				p.sendMessage(LangHandler.get("ColorMe", "Set.Self","colors",Endgame));
+		      me.tWizT3d_dreaMr.colors.colorConfig.setColor(p, Endgame);
+		
+		      return true;
+		
+		}
+		  
+		  return false;
 	  
-}return false;
 }
-}
+ }
 
