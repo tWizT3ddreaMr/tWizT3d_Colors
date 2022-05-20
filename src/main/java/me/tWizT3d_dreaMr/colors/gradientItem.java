@@ -50,7 +50,7 @@ public class gradientItem {
 	}
 	Integer loch=Math.max(loc1, loc2);
 	Integer locl=Math.min(loc1, loc2);
-	if(item.getItemMeta().getLore().size()<(loch+1)) {
+	if(item.getItemMeta().getLore().size()<loch) {
 		p.sendMessage(ChatColor.RED+"Lore not long enough");//check
 		return;
 	}
@@ -72,7 +72,7 @@ public class gradientItem {
 			Bukkit.getLogger().log(Level.SEVERE, "hex "+hx+" malformed");
 			continue;
 		}
-		lore.set(locl,ChatColor.of("#"+hx)+ChatColor.stripColor(lore.get(locl)));
+		lore.set(locl-1,ChatColor.of("#"+hx)+ChatColor.stripColor(lore.get(locl-1)));
 		locl++;
 	}
 	ItemMeta im =item.getItemMeta();
