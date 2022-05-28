@@ -1,4 +1,4 @@
- package me.tWizT3d_dreaMr.colors;
+ package me.tWizT3d_dreaMr.Listeners;
  
  import java.util.Scanner;
 
@@ -6,6 +6,10 @@ import org.bukkit.event.EventHandler;
  import org.bukkit.event.EventPriority;
  import org.bukkit.event.Listener;
  import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import me.tWizT3d_dreaMr.colors.color;
+import me.tWizT3d_dreaMr.colors.colorConfig;
+import me.tWizT3d_dreaMr.colors.colorFile;
  
  public class Chat implements Listener
  {

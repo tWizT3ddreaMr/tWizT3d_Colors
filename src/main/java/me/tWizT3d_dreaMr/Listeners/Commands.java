@@ -1,4 +1,4 @@
-package me.tWizT3d_dreaMr.colors;
+package me.tWizT3d_dreaMr.Listeners;
 
 import java.util.Scanner;
 
@@ -6,7 +6,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-public class command implements org.bukkit.event.Listener
+import me.tWizT3d_dreaMr.colors.color;
+import me.tWizT3d_dreaMr.colors.colorConfig;
+import me.tWizT3d_dreaMr.colors.colorFile;
+
+public class Commands implements org.bukkit.event.Listener
 {
    public static FileConfiguration conf;
    

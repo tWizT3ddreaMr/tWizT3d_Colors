@@ -8,6 +8,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import me.tWizT3d_dreaMr.Listeners.Chat;
+import me.tWizT3d_dreaMr.Listeners.Commands;
+import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
+import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
 import net.md_5.bungee.api.ChatColor;
  
  public class main extends org.bukkit.plugin.java.JavaPlugin
@@ -28,9 +33,9 @@ public void onEnable()
 		colorFile.enable();
 		me.tWizT3d_dreaMr.colors.configHandler.enable();
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
-	    Bukkit.getPluginManager().registerEvents(new AnvilRoname(), this);
-        Bukkit.getPluginManager().registerEvents(new command(), this);
-        Bukkit.getPluginManager().registerEvents(new signHandler(), this);
+	    Bukkit.getPluginManager().registerEvents(new Anvil(), this);
+        Bukkit.getPluginManager().registerEvents(new Commands(), this);
+        Bukkit.getPluginManager().registerEvents(new Signs(), this);
 	
 	    
 		config.options().copyDefaults(true);

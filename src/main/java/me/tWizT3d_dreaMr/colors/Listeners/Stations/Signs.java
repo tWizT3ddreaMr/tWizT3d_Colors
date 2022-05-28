@@ -1,4 +1,4 @@
-package me.tWizT3d_dreaMr.colors;
+package me.tWizT3d_dreaMr.colors.Listeners.Stations;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.Sign;
@@ -6,7 +6,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-public class signHandler implements Listener {
+import me.tWizT3d_dreaMr.colors.colorFile;
+import me.tWizT3d_dreaMr.colors.main;
+
+public class Signs implements Listener {
 @EventHandler
 public void onShopCreation(SignChangeEvent e) {
 	Bukkit.getServer().getScheduler().runTask(main.plugin, new Runnable() {
