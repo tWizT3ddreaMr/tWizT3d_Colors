@@ -5,6 +5,12 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 public class color {
+	/*
+	
+	TODO 
+	replace class with a hashmap or a color object
+	
+	*/
 	public static String add(String s,List<String> list, Player p){
 		String result="";
 		while(s.startsWith(" ")) {
