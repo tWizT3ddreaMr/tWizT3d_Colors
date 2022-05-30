@@ -68,7 +68,7 @@ public static ArrayList<String> colorcommand() {
 				if(color.isRandomColor(s))
 					temp=temp+r()+"&"+s+"** ";
 				else 
-					temp=temp+color.getColorString(s)+"&"+s;
+					temp=temp+color.getColor(s)+"&"+s;
 				ret.add(temp);
 				temp="  ";
 				i=0;
@@ -76,7 +76,7 @@ public static ArrayList<String> colorcommand() {
 				if(color.isRandomColor(s))
 					temp=temp+r()+"&"+s+"** ";
 				else 
-					temp=temp+color.getColorString(s)+"&"+s;
+					temp=temp+color.getColor(s)+"&"+s+" ";
 				i++;
 			}
 		
@@ -85,7 +85,7 @@ public static ArrayList<String> colorcommand() {
 		ret.add(temp);
 	}
 	ret.add(""+r()+ChatColor.STRIKETHROUGH+"                                                 ");
-	ret.add(ChatColor.translateAlternateColorCodes('&',"&3� &f&lCustoms with ** is random."));
+	ret.add(ChatColor.translateAlternateColorCodes('&',"&3* &f&lCustoms with ** is random."));
 	ret.add(""+r()+ChatColor.STRIKETHROUGH+"                                                 ");
 	//		&c&e&a&b&9&d
 	

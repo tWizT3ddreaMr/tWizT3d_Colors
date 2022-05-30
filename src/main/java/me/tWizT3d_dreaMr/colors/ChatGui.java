@@ -79,7 +79,7 @@ public static void Command(Player p) {
 public static TextComponent MessageBuilder(String Message,String hex,String col) {
 	TextComponent message = new TextComponent(Message);
 	if(!hex.isEmpty())
-		message.setColor(ChatColor.of("#"+hex));
+		message.setColor(color.getColor(col));
 	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor set "+col ) );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( ChatColor.AQUA+"Set your chat to this color" ) ) );
 	return message;

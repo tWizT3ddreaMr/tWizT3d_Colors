@@ -2,12 +2,17 @@ package me.tWizT3d_dreaMr.colors;
 
 import net.md_5.bungee.api.ChatColor;
 
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.bukkit.Bukkit;
 
 public class Formatter {
 
     private static final Pattern pattern = Pattern.compile("(?<!\\\\)(&#[a-fA-F0-9]{6})");
+
+    private static final Pattern patternAl = Pattern.compile("(?<!\\\\)(&#[a-fA-F0-9]{6})");
 
   
     public static String formatnp(String message) {
@@ -24,8 +29,7 @@ public class Formatter {
     public static boolean hasHex(String message) {
         Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
-         return true;
-      
+        	return true;
         }
         return false;
     }
@@ -34,10 +38,10 @@ public class Formatter {
         if (matcher.find()) {
             String color = message.substring(matcher.start()+1, matcher.end());
 	            
-	        message = message.replace("&"+color, "" + ChatColor.of(color));      
+	        message = message.replace("&"+color, "");      
         }else 
         	return false;
-        if(message.isEmpty()) {
+        if(message.isBlank()) {
         	return true;
         }
         return false;

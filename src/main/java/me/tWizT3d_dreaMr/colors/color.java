@@ -1,5 +1,6 @@
 package me.tWizT3d_dreaMr.colors;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,13 +21,13 @@ if(hex.equalsIgnoreCase("random")) {
 key= key.replace("&", "");
 hex= hex.replace("#", "");
 hex= hex.replace("&", "");
-hex= "#"+hex;
+hex= "&#"+hex;
 if(Formatter.isHex(hex)) {
-	ChatColor end= ChatColor.of(hex);
+	ChatColor end= ChatColor.of(hex.replace("&", ""));
 	if(end != null) {
 		colors.put(key, end);
 	}
-}
+} 
 }
 public static ChatColor getColor(String key) {
 key= key.replace("&", "");
@@ -39,7 +40,12 @@ return get;
 public static String getColorString(String key) {
 key= key.replace("&", "");
 ChatColor get=colors.get(key);
-return	get.getColor().toString();
+if(get==null) {
+	return randomHexString();
+}
+Color c= get.getColor();
+
+return "#"+Integer.toHexString(c.getRed())+Integer.toHexString(c.getGreen())+Integer.toHexString(c.getBlue());
 }
 public static ChatColor randomColor() {
 String hex="#"+randomHexString();
@@ -84,11 +90,17 @@ public static boolean isRandomColor(String s) {
 
 public static String ColorfyString(String message, Player p, String Action, String Char) {
 for(String key: colors.keySet()) {
-	if(p != null && p.hasPermission("tc."+Action+"."+key)) 
+	if(p != null && !(p.hasPermission("tc."+Action+"."+key)))
 		continue;
-	
 	if(message.contains(Char+key)) {
-		message=message.replace(Char+key, ""+getColor(key));
+		if(isRandomColor(key)) {
+			while(message.contains(Char+key)) 
+				message=message.replaceFirst(Char+key, ""+getColor(key));
+			
+		}
+		else
+			message=message.replace(Char+key, ""+getColor(key));
+		
 	}
 }
 message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);

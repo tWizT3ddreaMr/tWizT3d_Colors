@@ -35,5 +35,5 @@ permissions:
     Colorme.h.Anvil:
         description: allows the user to change server settings
         default: op
-depend:
+softdepend:
    [ PlaceholderAPI ]

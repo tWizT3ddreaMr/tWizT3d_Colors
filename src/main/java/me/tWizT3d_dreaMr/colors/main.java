@@ -23,7 +23,7 @@ import net.md_5.bungee.api.ChatColor;
  public static Set<String> pinatas;
 public void onEnable() {
 	LangHandler.enable();
-	colorConfig.enable();
+	colorFile.enable();
 	config = getConfig();
 	config.options().copyDefaults(true);
 	saveConfig();
