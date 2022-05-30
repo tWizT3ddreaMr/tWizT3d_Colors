@@ -1,149 +1,97 @@
 package me.tWizT3d_dreaMr.colors;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Set;
 
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class color {
-	/*
+private static HashMap<String, ChatColor> colors;
+public static void addColor(String key, String hex) {
+//	if(colors == null)
+	//	colors=new HashMap<String, ChatColor>();
+if(hex.equalsIgnoreCase("random")) {
+	colors.put(key, null);
+}
+key= key.replace("&", "");
+hex= hex.replace("#", "");
+hex= hex.replace("&", "");
+hex= "#"+hex;
+if(Formatter.isHex(hex)) {
+	ChatColor end= ChatColor.of(hex);
+	if(end != null) {
+		colors.put(key, end);
+	}
+}
+}
+public static ChatColor getColor(String key) {
+key= key.replace("&", "");
+ChatColor get=colors.get(key);
+if(get==null) {
+	get=randomColor();
+}
+return get;
+}
+public static String getColorString(String key) {
+key= key.replace("&", "");
+ChatColor get=colors.get(key);
+return	get.getColor().toString();
+}
+public static ChatColor randomColor() {
+String hex="#"+randomHexString();
+return ChatColor.of(hex);
 	
-	TODO 
-	replace class with a hashmap or a color object
+}
+public static String randomHexString() {
+String characters ="abcdef1234567890";
+String hex="";
+while(hex.length()!=6){
+	int r=random(characters.length());
+		if(r!=characters.length())
+			hex=hex+characters.substring(r,r+1);
+		else
+			hex=hex+characters.substring(r);
+}
+return hex;
 	
-	*/
-	public static String add(String s,List<String> list, Player p){
-		String result="";
-		while(s.startsWith(" ")) {
-			s=s.substring(1);
-		}
-		if(s.contains("&H")) {
-			s.replaceAll("&H", "&h");
-		}
-		while(s.contains("&h")) {
-			String[]end=add2(s);
-			String setcolor=end[1];
-			int i=0;
-			int i2=0;
-			while(i<setcolor.length()){
-				if(i2==list.size()) {
-					i2=0;
-				}
-				String color=list.get(i2);
-				if(color.equalsIgnoreCase("&b")&!p.hasPermission("chatcontrol.chat.format.color.b)")) color="&d";
-				if(color.equalsIgnoreCase("&a")&!p.hasPermission("chatcontrol.chat.format.color.a)")) color="&d";
-				if(color.equalsIgnoreCase("&0")&!p.hasPermission("chatcontrol.chat.format.color.0)")) color="&d";
-				
-				result=result+color+setcolor.substring(i, i+1);
+}
 
-				
-				i++;
-				i2++;
-			}s=end[0]+result+end[2];
-		}
-		return s;
-	}public static String addc(String s,List<String> list, Player p){
-		String result="";
-		while(s.startsWith(" ")) {
-			s=s.substring(1);
-		}
-		if(s.contains("&H")) {
-			s.replaceAll("&H", "&h");
-		}
-		while(s.contains("&h")) {
-			String[]end=add2(s);
-			String setcolor=end[1];
-			int i=0;
-			int i2=0;
-			while(i<setcolor.length()){
-				if(i2==list.size()) {
-					i2=0;
-				}
-				String color=list.get(i2);
-				result=result+color+setcolor.substring(i, i+1);
+private static int random(int x){
+Random randomGenerator = new Random();
+int	rand = randomGenerator.nextInt((x+1));
+return rand;
+}
+public static Set<String> getColorsCodes() {
+return colors.keySet();
+}
+public static Collection<ChatColor> getColors() {
+return colors.values();
+}
+public static void init() {
+	colors= new HashMap<String, ChatColor>();
+	//TODO
+}
+public static boolean isColor(String s) {
+	return colors.containsKey(s);
+}
+public static boolean isRandomColor(String s) {
+	return colors.get(s)==null;
+}
 
-				
-				i++;
-				i2++;
-			}s=end[0]+result+end[2];
-		}
-		return s;
+public static String ColorfyString(String message, Player p, String Action, String Char) {
+for(String key: colors.keySet()) {
+	if(p != null && p.hasPermission("tc."+Action+"."+key)) 
+		continue;
+	
+	if(message.contains(Char+key)) {
+		message=message.replace(Char+key, ""+getColor(key));
 	}
-	public static String[] add2(String s){
-		if(s.toLowerCase().contains("&h")){
-			String colorme=s.substring(s.indexOf("&h"));String c2="";
-			if(colorme.contains("&h"))
-			c2=colorme.replaceAll("&h","");
-			String dont="";
-			if(s.indexOf("&h")!=0)dont=s.replace(colorme, "");
-			String aft="";
-			if(c2.contains("&")){
-				aft=colorme;
-				if(colorme.contains("&h")) {
-					c2=colorme.replace("&h","");colorme=c2;}
-				colorme=colorme.substring(0,colorme.indexOf("&"));
-				aft=c2.substring(c2.indexOf("&"));
-				
-			}
-			if(colorme.contains("&h")) {
-			c2=colorme.replace("&h","");colorme=c2;
-			colorme.replace("&h","");}
-			String[] end= {dont,colorme,aft};
-			return end;
-			
-		}
-		return null;
-		
-	}public static String addanv(String s,List<String> list){
-		String result="";
-		while(s.startsWith(" ")) {
-			s=s.substring(1);
-		}
-		if(s.contains("&H")) {
-			s.replaceAll("&H", "&h");
-		}
-		while(s.contains("&h")) {
-			String[]end=addanv2(s);
-			String setcolor=end[1];
-			int i=0;
-			int i2=0;
-			while(i<setcolor.length()){
-				if(i2==list.size()) {
-					i2=0;
-				}
-				String color=list.get(i2);
-				result=result+color+setcolor.substring(i, i+1);
-
-				
-				i++;
-				i2++;
-			}s=end[0]+result+end[2];
-		}
-		return s;
-	}
-	public static String[] addanv2(String s){
-		if(s.toLowerCase().contains("&h")){
-			String colorme=s.substring(s.indexOf("&h"));String c2="";
-			if(colorme.contains("&h"))
-			c2=colorme.replaceAll("&h","");
-			String dont="";
-			if(s.indexOf("&h")!=0)dont=s.replace(colorme, "");
-			String aft="";
-			if(c2.contains("&")){
-				aft=colorme;
-				if(colorme.contains("&h")) {
-					c2=colorme.replace("&h","");colorme=c2;}
-				colorme=colorme.substring(0,colorme.indexOf("&"));
-				aft=c2.substring(c2.indexOf("&"));
-				
-			}
-			if(colorme.contains("&h")) {
-			c2=colorme.replace("&h","");colorme=c2;
-			colorme.replace("&h","");}
-			String[] end= {dont,colorme,aft};
-			return end;
-			
-		}
-		return null;
-		
-	}
+}
+message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
+return message;
+}
 }

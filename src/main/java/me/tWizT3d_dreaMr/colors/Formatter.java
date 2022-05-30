@@ -20,7 +20,8 @@ public class Formatter {
       
         }
         return message;
-    }   public static boolean hasHex(String message) {
+    } 
+    public static boolean hasHex(String message) {
         Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
          return true;
@@ -28,6 +29,18 @@ public class Formatter {
         }
         return false;
     }
-
+    public static boolean isHex(String message) {
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+            String color = message.substring(matcher.start()+1, matcher.end());
+	            
+	        message = message.replace("&"+color, "" + ChatColor.of(color));      
+        }else 
+        	return false;
+        if(message.isEmpty()) {
+        	return true;
+        }
+        return false;
+    } 
 
 }
