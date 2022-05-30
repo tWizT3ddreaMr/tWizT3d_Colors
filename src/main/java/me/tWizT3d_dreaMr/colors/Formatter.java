@@ -20,6 +20,13 @@ public class Formatter {
       
         }
         return message;
+    }   public static boolean hasHex(String message) {
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+         return true;
+      
+        }
+        return false;
     }
 
 

@@ -112,6 +112,7 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
 					 p.sendMessage(ChatColor.RED+"You have removed your color");
 					 return true;
 				 } 
+				  sender.sendMessage("Incorrect format");return true;
 			 }
 			 if(args.length==2) {
 				 if(args[0].equalsIgnoreCase("set")) {
@@ -122,13 +123,22 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
 						 }
 						 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix !"+args[1]);
 						 p.sendMessage(colorFile.Colorfyexclamation("!bYou have set your chatcolor to !"+args[1]+"this color"));return true;}
+					 	else if(Formatter.hasHex(args[1])) {
+							 if(!p.hasPermission("tc2.color."+args[1])) {
+								 p.sendMessage(colorFile.Colorfyexclamation("!cYou cannot set your color to !"+args[1]+"this color"));
+								 return true;
+							 }
+							 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix "+args[1]);
+							 p.sendMessage(Formatter.formatnp(colorFile.Colorfyexclamation("!bYou have set your chatcolor to "+args[1]+"this color")));return true;}
 					 	else {p.sendMessage(ChatColor.RED+"That is not a color");return true;}
 				 }
+				  sender.sendMessage("Incorrect format");return true;
 			 }
 		  }
 		  else {
 			  sender.sendMessage("no");return true;
-		  }}if ((command.getName().equalsIgnoreCase("color")) && ((sender instanceof Player))) {
+		  }
+		  }if ((command.getName().equalsIgnoreCase("color")) && ((sender instanceof Player))) {
 				
 				if(!(((Player)sender).hasPermission("Colorme.set.self")||((Player)sender).hasPermission("Colorme.set.server"))) {
 					((Player)sender).sendMessage(LangHandler.get("General","NoPerms",null,null));
