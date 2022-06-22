@@ -37,7 +37,7 @@ public void onEnable() {
 	Bukkit.getPluginManager().registerEvents(new Commands(), this);
 	Bukkit.getPluginManager().registerEvents(new Signs(), this);
 	
-	
+	config.addDefault("FormatFilter", true);
 	config.options().copyDefaults(true);
 	saveConfig();
 	if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -139,6 +139,9 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 	}
 }
 return false;
+}
+public static boolean isFilterOn() {
+	return config.getBoolean("FormatFilter");
 }
 }
 

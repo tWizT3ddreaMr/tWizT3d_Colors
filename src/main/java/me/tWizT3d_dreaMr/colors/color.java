@@ -103,7 +103,14 @@ for(String key: colors.keySet()) {
 		
 	}
 }
-if(p != null && Action.equalsIgnoreCase("chat"))
+if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect.inspect") && main.isFilterOn()) {
+	message=message.replace("&l", "");
+	message=message.replace("&k", "");
+	message=message.replace("&m", "");
+	message=message.replace("&n", "");
+	message=message.replace("&o", "");
+}
+if(p != null && (!Action.equalsIgnoreCase("chat")||p.hasPermission("tc.Chat.Defaults")))
 	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
 return message;
 }
