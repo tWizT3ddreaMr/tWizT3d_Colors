@@ -48,14 +48,21 @@ public class gradientItem {
 			if(i==1)loc2=Integer.parseInt(args[i].replaceAll("[^0-9]", ""))-1;
 		}
 	}
-	Integer loch=Math.max(loc1, loc2);
-	Integer locl=Math.min(loc1, loc2);
-	if(item.getItemMeta().getLore().size()<loch) {
+	Integer loch=Math.max(loc1, loc2)-1;
+	Integer locl=Math.min(loc1, loc2)+1;
+	List<String> lore=item.getItemMeta().getLore();
+	p.sendMessage(""+lore.size());
+	p.sendMessage(""+loch);
+	p.sendMessage(""+locl);
+	if(lore.size()<loch) {
 		p.sendMessage(ChatColor.RED+"Lore not long enough");//check
 		return;
 	}
 	int dif=loch-locl+2;
 	int garsize=dif/(hexes.size()-1);
+	int gardif=dif%hexes.size();
+	p.sendMessage(""+gardif);
+	p.sendMessage(""+garsize);
 	ArrayList<String> grabass=new ArrayList<String>();
 	for(int n=0;n<(hexes.size()-1);n++) {
 		ArrayList<String> temp=GraMe(hexes.get(n),hexes.get(n+1),garsize);
@@ -65,7 +72,6 @@ public class gradientItem {
 		}
 		grabass.addAll(temp);
 	}
-	List<String> lore=item.getItemMeta().getLore();
 
 	for(String hx:grabass) {
 		if(hx.length()!=6) {
@@ -82,76 +88,74 @@ public class gradientItem {
 	p.updateInventory();
 	p.sendMessage(ChatColor.GREEN+"Your lore has been updated.");	//(conf,"Grad","Success","&aYour lore has been updated.");
 	}
-	
-	
+
 	public static ArrayList<String> GraMe(String h2,String h1,int garsize){
-	ArrayList<String> graout=new ArrayList<String>();
+		ArrayList<String> graout=new ArrayList<String>();
 
-	h1=h1.replace("#", "");
-	h1=h1.replace("&", "");
-	h2=h2.replace("#","");
-	h2=h2.replace("&","");
-	if(h1.length()!=6) {
-		Bukkit.getLogger().log(Level.SEVERE, "h1 not right length: "+h1);
-		return null;
-	}if(h2.length()!=6) {
-		Bukkit.getLogger().log(Level.SEVERE, "h2 not right length: "+h2);
-		return null;
-	}
-	int h1r=Integer.parseInt(h1.substring(0, 2),16);
-	int h1g=Integer.parseInt(h1.substring(2, 4),16);
-	int h1b=Integer.parseInt(h1.substring(4),16);
-	
-	int h2r=Integer.parseInt(h2.substring(0, 2),16);
-	int h2g=Integer.parseInt(h2.substring(2, 4),16);
-	int h2b=Integer.parseInt(h2.substring(4),16);
+		h1=h1.replace("#", "");
+		h1=h1.replace("&", "");
+		h2=h2.replace("#","");
+		h2=h2.replace("&","");
+		if(h1.length()!=6) {
+			System.out.println( "h1 not right length: "+h1);
+			return null;
+		}if(h2.length()!=6) {
+			System.out.println("h2 not right length: "+h2);
+			return null;
+		}
+		int h1r=Integer.parseInt(h1.substring(0, 2),16);
+		int h1g=Integer.parseInt(h1.substring(2, 4),16);
+		int h1b=Integer.parseInt(h1.substring(4),16);
+		
+		int h2r=Integer.parseInt(h2.substring(0, 2),16);
+		int h2g=Integer.parseInt(h2.substring(2, 4),16);
+		int h2b=Integer.parseInt(h2.substring(4),16);
 
-	ArrayList<Integer> r=numes(h1r,h2r,garsize);
-	ArrayList<Integer> g=numes(h1g,h2g,garsize);
-	ArrayList<Integer> b=numes(h1b,h2b,garsize);
-	
-	for(int i=0;i<r.size();i++) {
-		String hr=Integer.toHexString(r.get(i));
-		String hg=Integer.toHexString(g.get(i));
-		String hb=Integer.toHexString(b.get(i));
+		ArrayList<Integer> r=numes(h1r,h2r,garsize);
+		ArrayList<Integer> g=numes(h1g,h2g,garsize);
+		ArrayList<Integer> b=numes(h1b,h2b,garsize);
+
+		for(int i=0;i<r.size();i++) {
+			String hr=Integer.toHexString(r.get(i));
+			String hg=Integer.toHexString(g.get(i));
+			String hb=Integer.toHexString(b.get(i));
+			
+			if(hr.length()==1)
+				hr="0"+hr;
+			else if(hr.length()==3)
+				hr="ff";
+			if(hg.length()==1)
+				hg="0"+hg;
+			else if(hg.length()==3)
+				hg="ff";
+			if(hb.length()==1)
+				hb="0"+hb;
+			else if(hb.length()==3)
+				hb="ff";
+			
+			String hex=hr+hg+hb;
+			graout.add(hex);
+		}
 		
-		if(hr.length()==1)
-			hr="0"+hr;
-		else if(hr.length()==3)
-			hr="ff";
-		if(hg.length()==1)
-			hg="0"+hg;
-		else if(hg.length()==3)
-			hg="ff";
-		if(hb.length()==1)
-			hb="0"+hb;
-		else if(hb.length()==3)
-			hb="ff";
-		
-		String hex=hr+hg+hb;
-		graout.add(hex);
-	}
-	
-	return graout;
-	}
+		return graout;
+		}
 	public static ArrayList<Integer> numes(Integer a, Integer b, int gs){
 		ArrayList<Integer> out=new ArrayList<Integer>();
 		int dif=a-b;
 		if(dif==0) {
-			for(int i=0;i<(gs-1);i++) {
+			for(int i=0;i<(gs+1);i++) {
 				out.add(a);
 			}
 		}
 		else {
-			int incr=Math.floorDiv(dif, gs-2)+1;
-			if((dif/gs-2)!=0)
-			for(int i=0;i<(gs-2);i++) {
+			int incr=Math.floorDiv(dif, gs);
+			if((dif/gs)!=0)
+			for(int i=0;i<(gs);i++) {
 				out.add(b+(incr*i));
 			}
 			out.add(a);
 		}
-		
-		
+
 		return out;
 	}
 	private static final Pattern pattern = Pattern.compile("(?<!\\\\)(#[a-fA-F0-9]{6})");

@@ -1,4 +1,4 @@
- package me.tWizT3d_dreaMr.Listeners;
+ package me.tWizT3d_dreaMr.colors.Listeners;
  
  import org.bukkit.event.EventHandler;
  import org.bukkit.event.EventPriority;

@@ -9,8 +9,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import me.tWizT3d_dreaMr.Listeners.Chat;
-import me.tWizT3d_dreaMr.Listeners.Commands;
+import me.tWizT3d_dreaMr.colors.Listeners.Chat;
+import me.tWizT3d_dreaMr.colors.Listeners.Commands;
 import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
 import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
 import net.md_5.bungee.api.ChatColor;

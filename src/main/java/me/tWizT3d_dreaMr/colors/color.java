@@ -103,7 +103,8 @@ for(String key: colors.keySet()) {
 		
 	}
 }
-message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
+if(p != null && Action.equalsIgnoreCase("chat"))
+	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
 return message;
 }
 }
