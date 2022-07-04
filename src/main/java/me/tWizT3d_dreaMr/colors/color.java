@@ -41,7 +41,7 @@ public static String getColorString(String key) {
 key= key.replace("&", "");
 ChatColor get=colors.get(key);
 if(get==null) {
-	return randomHexString();
+	return "#"+randomHexString();
 }
 Color c= get.getColor();
 

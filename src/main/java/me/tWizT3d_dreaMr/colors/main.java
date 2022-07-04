@@ -56,7 +56,7 @@ if (command.getName().equalsIgnoreCase("grad")) {
 			sender.sendMessage(LangHandler.get("General","NoPerms",null,null));
 			return true;
 		}
-		gradientItem.comgra((Player)sender, args);
+		gradientItem.gothrough(args, (Player) sender);
 		return true;
 		}
 	else {
