@@ -107,6 +107,9 @@ public class Expansion extends PlaceholderExpansion {
         if(color.isColor(identifier)) {
         	return color.getColorString(identifier);
         }
+        if(color.isColor(identifier.replace("color", ""))) {
+        	return color.getColor(identifier.replace("color", ""))+"";
+        }
  
         // %someplugin_placeholder1%
         if(identifier.equals("prefix")){
