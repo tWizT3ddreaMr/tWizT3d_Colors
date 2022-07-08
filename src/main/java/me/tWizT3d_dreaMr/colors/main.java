@@ -86,7 +86,7 @@ if (command.getName().equalsIgnoreCase("colorme")) {
 if(command.getName().equalsIgnoreCase("colors")) {
 	if(sender instanceof Player) {
 		for(String s:colorFile.colorcommand()) {
-			sender.sendMessage(s);
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('!', color.ColorfyString(s, null, null, "!")));
 		}
 	}
 	return true;

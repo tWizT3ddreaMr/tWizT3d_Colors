@@ -94,7 +94,6 @@ return colors.values();
 public static void init() {
 	colors= new HashMap<String, ChatColor>();
 	grads= new HashMap<String, String[]>();
-	//TODO
 }
 public static boolean isColor(String s) {
 	return colors.containsKey(s);
