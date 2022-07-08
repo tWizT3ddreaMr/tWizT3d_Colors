@@ -114,8 +114,6 @@ public class gradientItem {
 	}
 
 	public static String[] comgra(String[] strings, int start, int end, String[] lore) {
-
-
 		Integer loch=Math.max(start, end);
 		Integer locl=Math.min(start, end);
 		int dif=loch-locl;
@@ -145,8 +143,6 @@ public class gradientItem {
 	}	
 
 	public static String[] comgra2(ArrayList<String> hexes, int start, int end, String[] lore) {
-
-
 		Integer loch=Math.max(start, end);
 		Integer locl=Math.min(start, end);
 		int dif=loch-locl;
