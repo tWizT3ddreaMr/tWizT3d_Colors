@@ -1,6 +1,7 @@
 package me.tWizT3d_dreaMr.colors;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,6 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class color {
 private static HashMap<String, ChatColor> colors;
+private static HashMap<String, String[]> grads;
 public static void addColor(String key, String hex) {
 //	if(colors == null)
 	//	colors=new HashMap<String, ChatColor>();
@@ -37,6 +39,18 @@ if(get==null) {
 }
 return get;
 }
+public static ArrayList<String> getGrads(String key) {
+	key= key.replace("&", "");
+	String[] get=grads.get(key);
+	ArrayList<String> ret=new ArrayList<String>();
+	for(String s:get) {
+		if(!s.startsWith("#")) {
+			s="#"+s;
+		}
+		ret.add(s);
+		}
+	return ret;
+	}
 public static String getColorString(String key) {
 key= key.replace("&", "");
 ChatColor get=colors.get(key);
@@ -79,6 +93,7 @@ return colors.values();
 }
 public static void init() {
 	colors= new HashMap<String, ChatColor>();
+	grads= new HashMap<String, String[]>();
 	//TODO
 }
 public static boolean isColor(String s) {
@@ -89,6 +104,14 @@ public static boolean isRandomColor(String s) {
 }
 
 public static String ColorfyString(String message, Player p, String Action, String Char) {
+for(String key: grads.keySet()) {
+	if(p != null && !(p.hasPermission("tc."+Action+"."+key)))
+		continue;
+	while(message.contains(Char+key)) {
+		message=message.replaceFirst(Char+key, "");
+		message=gradientItem.gradString(grads.get(key), message);
+	}
+}
 for(String key: colors.keySet()) {
 	if(p != null && !(p.hasPermission("tc."+Action+"."+key)))
 		continue;

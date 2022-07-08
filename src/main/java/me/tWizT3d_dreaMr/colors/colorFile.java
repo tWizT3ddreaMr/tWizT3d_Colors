@@ -47,6 +47,7 @@ public class colorFile {
 	private static void createDef() {
 		config.set("Config", "1");
 		config.set("ColorCodes.j", "ff6600");
+		config.set("GradientCodes.gr", "ff00ff ffff00");
 	}
 public static ArrayList<String> colorcommand() {
 	ArrayList<String> ret=new ArrayList<String>();

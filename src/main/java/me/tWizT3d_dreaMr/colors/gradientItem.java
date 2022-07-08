@@ -88,6 +88,61 @@ public class gradientItem {
 		item.setItemMeta(im);
 		p.sendMessage(ChatColor.GREEN+"Your lore has been updated.");
 	}
+	public static String gradString(String[] strings,String st) {
+		
+		String ep="";
+		if(st.contains("&")) {
+			ep=st.substring(st.indexOf('&'));
+			st=st.substring(0, st.indexOf('&'));
+		}
+		
+		char[] lc=st.toCharArray();
+		String[] ls=new String[lc.length];
+
+		int i=0;
+		for(char s:lc) {
+			ls[i]=""+s;
+			i++;
+		}
+		String[] end=comgra(strings, 1, ls.length, ls);
+		String fin="";
+		for(String s:end)
+			fin=fin+s;
+		st=fin+ep;
+		
+		return st;
+	}
+
+	public static String[] comgra(String[] strings, int start, int end, String[] lore) {
+
+
+		Integer loch=Math.max(start, end);
+		Integer locl=Math.min(start, end);
+		int dif=loch-locl;
+		int garsize=dif;
+		
+		ArrayList<String> grabass=new ArrayList<String>();
+			ArrayList<String> temp;
+			temp=GraMe(strings[0],strings[1],garsize);
+			
+			if(temp == null) {
+				Bukkit.getLogger().log(Level.WARNING, "H1 or H2 null");//in lang
+				return null;
+			}
+			grabass.addAll(temp);
+
+		for(String hx:grabass) {
+			if(hx.length()!=6) {
+				Bukkit.getLogger().log(Level.WARNING, "hex "+hx+" malformed");
+				Bukkit.getLogger().log(Level.WARNING, ""+locl);
+				locl++;
+				continue;
+			}
+			lore[locl-1]=ChatColor.of("#"+hx)+lore[locl-1];
+			locl++;
+		}
+		return lore;
+	}	
 
 	public static String[] comgra2(ArrayList<String> hexes, int start, int end, String[] lore) {
 
@@ -210,15 +265,13 @@ public class gradientItem {
 			}
 		}
 		else {
-			int incr=Math.floorDiv(dif, gs);
+			double incr=1.0*dif/gs;
 			if((dif/gs)!=0)
-				for(int i=0;i<(gs);i++) {
-					out.add(b+(incr*i));
-				}
-				out.add(a);
+			for(int i=0;i<(gs);i++) {
+				out.add((int) Math.floor(b+(incr*i)));
 			}
-			
-			
+			out.add(a);
+		}
 		return out;
 	}
 	private static final Pattern pattern = Pattern.compile("(?<!\\\\)(#[a-fA-F0-9]{6})");
