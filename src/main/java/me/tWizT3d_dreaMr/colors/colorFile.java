@@ -3,7 +3,6 @@ package me.tWizT3d_dreaMr.colors;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -72,9 +71,12 @@ public class colorFile {
 			e.printStackTrace();
 		}
 	}
-	
+
 	for(String s:config.getConfigurationSection("ColorCodes").getKeys(false)) {
 		color.addColor(s,config.getString("ColorCodes."+s));
+	}
+	for(String s:config.getConfigurationSection("GradientCodes").getKeys(false)) {
+		color.addGrad(s,config.getString("GradientCodes."+s));
 	}
 	}
 	private static void createDef() {

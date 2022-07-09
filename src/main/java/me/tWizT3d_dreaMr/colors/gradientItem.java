@@ -49,7 +49,7 @@ public class gradientItem {
 			}
 			if(lorlis.size()>a||lorlis.size()>b)
 			{
-				p.sendMessage(ChatColor.RED+"Lore not long enough.");
+				p.sendMessage(ChatColor.RED+"Lore not long enough. "+lorlis.size());
 				return;
 			}
 			lore= comgra2(hexes,a,b,lore);
@@ -129,16 +129,14 @@ public class gradientItem {
 			}
 			grabass.addAll(temp);
 
-		for(String hx:grabass) {
-			if(hx.length()!=6) {
-				Bukkit.getLogger().log(Level.WARNING, "hex "+hx+" malformed");
-				Bukkit.getLogger().log(Level.WARNING, ""+locl);
-				locl++;
-				continue;
-			}
-			lore[locl-1]=ChatColor.of("#"+hx)+lore[locl-1];
-			locl++;
-		}
+
+
+			if(locl!=0)
+				for(String hx:grabass) {
+					lore[locl-1]=hx+ChatColor.stripColor(lore[locl-1]);
+					locl++;
+				}
+		
 		return lore;
 	}	
 
@@ -227,6 +225,12 @@ public class gradientItem {
 		ArrayList<Integer> r=numes(h1r,h2r,garsize);
 		ArrayList<Integer> g=numes(h1g,h2g,garsize);
 		ArrayList<Integer> b=numes(h1b,h2b,garsize);
+		if(r.size()!=g.size()&&b.size()!=g.size())
+		{
+			r=numes(h1r,h2r,garsize);
+			g=numes(h1g,h2g,garsize);
+			b=numes(h1b,h2b,garsize);
+		}
 		for(int i=0;i<r.size();i++) {
 			String hr=Integer.toHexString(r.get(i));
 			String hg=Integer.toHexString(g.get(i));
@@ -262,7 +266,6 @@ public class gradientItem {
 		}
 		else {
 			double incr=1.0*dif/gs;
-			if((dif/gs)!=0)
 			for(int i=0;i<(gs);i++) {
 				out.add((int) Math.floor(b+(incr*i)));
 			}

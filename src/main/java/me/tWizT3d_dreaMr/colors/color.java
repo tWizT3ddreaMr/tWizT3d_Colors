@@ -30,6 +30,27 @@ if(Formatter.isHex(hex)) {
 		colors.put(key, end);
 	}
 } 
+}public static void addGrad(String key, String hexs) {
+//	if(colors == null)
+//	colors=new HashMap<String, ChatColor>();
+String hex2= "";
+key= key.replace("&", "");
+hexs= hexs.replace("#", "");
+hexs= hexs.replace(" ", "");
+hexs= hexs.replace("&", "");
+hex2= hexs.substring(0,6);
+hexs= hexs.substring(6);
+hexs="#"+hexs;
+hex2="#"+hex2;
+System.out.println(hexs);
+System.out.println(hex2);
+if((Formatter.isHex("&"+hexs)||hexs.equalsIgnoreCase("#random"))&&(Formatter.isHex("&"+hex2)||hexs.equalsIgnoreCase("#random"))) {
+	System.out.println(hexs);
+	String[] end= new String[] {hexs, hex2};
+	if(end != null) {
+		grads.put(key, end);
+	}
+} 
 }
 public static ChatColor getColor(String key) {
 key= key.replace("&", "");
@@ -44,9 +65,9 @@ public static ArrayList<String> getGrads(String key) {
 	String[] get=grads.get(key);
 	ArrayList<String> ret=new ArrayList<String>();
 	for(String s:get) {
-		if(!s.startsWith("#")) {
-			s="#"+s;
-		}
+		System.out.println(s);
+		if(s.equalsIgnoreCase("#random")) 
+			s="#"+randomHexString();
 		ret.add(s);
 		}
 	return ret;
@@ -97,18 +118,32 @@ public static void init() {
 }
 public static boolean isColor(String s) {
 	return colors.containsKey(s);
+}public static boolean isGrad(String s) {
+	return grads.containsKey(s.replace("&", ""));
 }
 public static boolean isRandomColor(String s) {
 	return colors.get(s)==null;
 }
+public static String replaceAllGrad(String s) {
+	for(String key:grads.keySet())
+		s=s.replace("&"+key, "");
+	return s;
+}
 
 public static String ColorfyString(String message, Player p, String Action, String Char) {
 for(String key: grads.keySet()) {
-	if(p != null && !(p.hasPermission("tc."+Action+"."+key)))
+	if(p != null && !(p.hasPermission("tcg."+Action+"."+key)))
 		continue;
 	while(message.contains(Char+key)) {
 		message=message.replaceFirst(Char+key, "");
-		message=gradientItem.gradString(grads.get(key), message);
+		String[]hxs=grads.get(key);
+		String[]hxs2=new String[] {hxs[0],hxs[1]};
+
+		if(hxs2[0].equalsIgnoreCase("#random")) 
+			hxs2[0]="#"+randomHexString();
+		if(hxs2[1].equalsIgnoreCase("#random")) 
+			hxs2[1]="#"+randomHexString();
+		message=gradientItem.gradString(hxs2, message);
 	}
 }
 for(String key: colors.keySet()) {
@@ -118,11 +153,9 @@ for(String key: colors.keySet()) {
 		if(isRandomColor(key)) {
 			while(message.contains(Char+key)) 
 				message=message.replaceFirst(Char+key, ""+getColor(key));
-			
 		}
 		else
 			message=message.replace(Char+key, ""+getColor(key));
-		
 	}
 }
 if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect.inspect") && main.isFilterOn()) {

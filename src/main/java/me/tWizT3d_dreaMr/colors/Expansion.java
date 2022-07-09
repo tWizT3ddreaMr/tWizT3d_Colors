@@ -118,7 +118,7 @@ public class Expansion extends PlaceholderExpansion {
 
         // %someplugin_placeholder2%
         if(identifier.equals("suffix")){
-            return color.ColorfyString(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_suffix%")),null, null, "!");
+            return color.ColorfyString(color.replaceAllGrad(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_suffix%"))),null, null, "!");
         }
  
         // We return null if an invalid placeholder (f.e. %someplugin_placeholder3%) 

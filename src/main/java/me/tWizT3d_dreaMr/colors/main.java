@@ -30,7 +30,6 @@ public void onEnable() {
 	plugin=this;
 	config = getConfig();
 	
-	colorFile.enable();
 	me.tWizT3d_dreaMr.colors.configHandler.enable();
 	Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	Bukkit.getPluginManager().registerEvents(new Anvil(), this);
