@@ -138,6 +138,8 @@ for(String key: grads.keySet()) {
 	if(p != null && !(p.hasPermission("tcg."+Action+"."+key)))
 		continue;
 	while(message.contains(Char+key)) {
+		String beg=message.substring(0, message.indexOf(Char+key));
+		message=message.substring(message.indexOf(Char+key));
 		message=message.replaceFirst(Char+key, "");
 		String[]hxs=grads.get(key);
 		String[]hxs2=new String[] {hxs[0],hxs[1]};
@@ -146,7 +148,7 @@ for(String key: grads.keySet()) {
 			hxs2[0]="#"+randomHexString();
 		if(hxs2[1].equalsIgnoreCase("#random")) 
 			hxs2[1]="#"+randomHexString();
-		message=gradientItem.gradString(hxs2, message);
+		message=beg+gradientItem.gradString(hxs2, message);
 	}
 }
 for(String key: colors.keySet()) {
