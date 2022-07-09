@@ -129,6 +129,21 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 					return true;
 				}
 			}
+			if(args[0].equalsIgnoreCase("setg")) {
+				if(color.isGrad(args[1])) {
+					if(!p.hasPermission("tcg2.color."+args[1])) {
+						p.sendMessage(color.ColorfyString("!cYou cannot set your color to !"+args[1]+"this color",null,null,"!"));
+						return true;
+					}
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix &"+args[1]);
+					p.sendMessage(color.ColorfyString("!bYou have set your chatcolor to !"+args[1]+"this color",null,null,"!"));
+					return true;
+				}
+				else {
+					p.sendMessage(ChatColor.RED+"That is not a gradient");
+					return true;
+				}
+			}
 			sender.sendMessage("Incorrect format");
 			return true;
 		}

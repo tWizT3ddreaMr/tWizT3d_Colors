@@ -109,6 +109,9 @@ return rand;
 public static Set<String> getColorsCodes() {
 return colors.keySet();
 }
+public static Set<String> getGradCodes() {
+return grads.keySet();
+}
 public static Collection<ChatColor> getColors() {
 return colors.values();
 }

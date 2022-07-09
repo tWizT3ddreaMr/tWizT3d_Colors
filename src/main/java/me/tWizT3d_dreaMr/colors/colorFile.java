@@ -138,6 +138,23 @@ public static ArrayList<String> colorcommand() {
 	if(!temp.equals("  ")) {
 		ret.add(temp);
 	}
+	temp="  ";
+	for(String s:color.getGradCodes()) {
+		
+		if(i==4) {
+			temp=temp+color.getGrads(s).get(0)+"&"+s+color.ColorfyString("&"+s+"||||||", null, "command", "&");
+			ret.add(temp);
+			temp="  ";
+			i=0;
+		}else {
+			temp=temp+color.getGrads(s).get(0)+"&"+s+ color.ColorfyString("&"+s+"||||||", null, "command", "&");
+			i++;
+		}
+	
+}
+if(!temp.equals("  ")) {
+	ret.add(temp);
+}
 	
 	for(String s:(List<String>) ColorCodeFileconfig.getList("End"))
 		ret.add(setT(s));
