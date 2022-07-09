@@ -1,6 +1,6 @@
 name: tWizT3dColors
 author: tWizT3d_dreaMr
-version: 1.4.5.7
+version: 1.4.6.01
 main: me.tWizT3d_dreaMr.colors.main
 api-version: 1.16
 commands:
@@ -35,5 +35,5 @@ permissions:
     Colorme.h.Anvil:
         description: allows the user to change server settings
         default: op
-depend:
+softdepend:
    [ PlaceholderAPI ]

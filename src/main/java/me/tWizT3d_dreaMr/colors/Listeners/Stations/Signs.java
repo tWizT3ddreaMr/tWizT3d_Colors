@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-import me.tWizT3d_dreaMr.colors.colorFile;
+import me.tWizT3d_dreaMr.colors.color;
 import me.tWizT3d_dreaMr.colors.main;
 
 public class Signs implements Listener {
@@ -16,10 +16,10 @@ public void onShopCreation(SignChangeEvent e) {
         @Override
         public void run() {
         	Sign sign = (Sign) e.getBlock().getState();
-        	sign.setLine(0,colorFile.ColorfySign(sign.getLine(0), e.getPlayer()));
-        	sign.setLine(1,colorFile.ColorfySign(sign.getLine(1), e.getPlayer()));
-        	sign.setLine(2,colorFile.ColorfySign(sign.getLine(2), e.getPlayer()));
-        	sign.setLine(3,colorFile.ColorfySign(sign.getLine(3), e.getPlayer()));
+        	sign.setLine(0,color.ColorfyString(sign.getLine(0), e.getPlayer(),"sign","&"));
+        	sign.setLine(1,color.ColorfyString(sign.getLine(1), e.getPlayer(),"sign","&"));
+        	sign.setLine(2,color.ColorfyString(sign.getLine(2), e.getPlayer(),"sign","&"));
+        	sign.setLine(3,color.ColorfyString(sign.getLine(3), e.getPlayer(),"sign","&"));
 
         	sign.update(true);
         }

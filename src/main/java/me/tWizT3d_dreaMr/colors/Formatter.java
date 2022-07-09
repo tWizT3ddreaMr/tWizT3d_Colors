@@ -9,7 +9,6 @@ public class Formatter {
 
     private static final Pattern pattern = Pattern.compile("(?<!\\\\)(&#[a-fA-F0-9]{6})");
 
-  
     public static String formatnp(String message) {
         Matcher matcher = pattern.matcher(message);
         while (matcher.find()) {
@@ -20,14 +19,26 @@ public class Formatter {
       
         }
         return message;
-    }   public static boolean hasHex(String message) {
+    } 
+    public static boolean hasHex(String message) {
         Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
-         return true;
-      
+        	return true;
         }
         return false;
     }
-
+    public static boolean isHex(String message) {
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+            String color = message.substring(matcher.start()+1, matcher.end());
+	            
+	        message = message.replace("&"+color, "");      
+        }else 
+        	return false;
+        if(message.isBlank()) {
+        	return true;
+        }
+        return false;
+    } 
 
 }

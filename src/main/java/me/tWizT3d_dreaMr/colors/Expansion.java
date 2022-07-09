@@ -104,18 +104,21 @@ public class Expansion extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer player, String identifier){
 
       
-        if(colorFile.isColorCodend(identifier)) {
-        	return colorFile.getColor(identifier);
+        if(color.isColor(identifier)) {
+        	return color.getColorString(identifier);
+        }
+        if(color.isColor(identifier.replace("color", ""))) {
+        	return color.getColor(identifier.replace("color", ""))+"";
         }
  
         // %someplugin_placeholder1%
         if(identifier.equals("prefix")){
-            return colorFile.Colorfyexclamation(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_prefix%")));
+            return color.ColorfyString(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_prefix%")),null, null, "!");
         }
 
         // %someplugin_placeholder2%
         if(identifier.equals("suffix")){
-            return colorFile.Colorfyexclamation(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_suffix%")));
+            return color.ColorfyString(color.replaceAllGrad(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_suffix%"))),null, null, "!");
         }
  
         // We return null if an invalid placeholder (f.e. %someplugin_placeholder3%) 

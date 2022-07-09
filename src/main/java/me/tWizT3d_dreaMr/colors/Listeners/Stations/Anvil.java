@@ -1,17 +1,17 @@
 package me.tWizT3d_dreaMr.colors.Listeners.Stations;
-import org.bukkit.ChatColor;
- import org.bukkit.entity.HumanEntity;
- import org.bukkit.entity.Player;
- import org.bukkit.event.EventHandler;
- import org.bukkit.event.EventPriority;
- import org.bukkit.event.inventory.InventoryClickEvent;
- import org.bukkit.inventory.AnvilInventory;
- import org.bukkit.inventory.Inventory;
- import org.bukkit.inventory.InventoryView;
- import org.bukkit.inventory.ItemStack;
+
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.AnvilInventory;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.tWizT3d_dreaMr.colors.colorFile;
+import me.tWizT3d_dreaMr.colors.color;
  
  public class Anvil implements org.bukkit.event.Listener
  {
@@ -48,8 +48,7 @@ import me.tWizT3d_dreaMr.colors.colorFile;
    }
 
 private String checker(Player p, String itemName) {
-	itemName=colorFile.ColorfyAnvil(itemName,p);
-	itemName=ChatColor.translateAlternateColorCodes('&', itemName);
+	itemName=color.ColorfyString(itemName,p,"anvil", "&");
 	
 	return itemName;
 }
