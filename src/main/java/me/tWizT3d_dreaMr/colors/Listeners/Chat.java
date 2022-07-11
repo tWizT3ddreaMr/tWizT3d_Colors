@@ -12,7 +12,7 @@ import me.tWizT3d_dreaMr.colors.color;
  {
    @EventHandler(ignoreCancelled=true, priority=EventPriority.LOWEST)
    public void chat(AsyncPlayerChatEvent e) {
-	    if(color.isGrad(PlaceholderAPI.setPlaceholders(e.getPlayer(), "%vault_suffix%"))) 
+	    if(color.isGrad(PlaceholderAPI.setPlaceholders(e.getPlayer(), "%vault_suffix%"))&&!e.getMessage().startsWith("#")&&!e.getMessage().startsWith("!")) 
 	    	e.setMessage(PlaceholderAPI.setPlaceholders(e.getPlayer(), "%vault_suffix%")+e.getMessage());
 	    
 		e.setMessage(color.ColorfyString(e.getMessage(), e.getPlayer(), "chat", "&"));

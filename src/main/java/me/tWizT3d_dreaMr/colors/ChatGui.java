@@ -68,6 +68,11 @@ public static void Command(Player p) {
 				i++;
 			}
 		}
+		if(i!=0) {
+			p.spigot().sendMessage(Builder);
+		}
+		Builder=new TextComponent("");
+		i=0;
 		p.sendMessage(ChatColor.DARK_GRAY+"--------------------------------");
 		colol=color.getGradCodes();
 		for(String col:colol) {
@@ -79,8 +84,8 @@ public static void Command(Player p) {
 			if(p.hasPermission("tcg2.chat."+col)) {
 				if(i!=0)
 					Builder.addExtra(new TextComponent(ChatColor.GRAY+", "));
-				Builder.addExtra(MessageBuilderGrad1("&"+col+"-",col));
-				Builder.addExtra(MessageBuilderGrad2(">"+"&"+col,col));
+				Builder.addExtra(MessageBuilderGrad1("&"+col+" -",col));
+				Builder.addExtra(MessageBuilderGrad2("> "+"&"+col,col));
 				i++;
 			}
 		}
@@ -102,7 +107,7 @@ public static TextComponent MessageBuilder(String Message,String hex,String col)
 public static TextComponent MessageBuilderGrad1(String Message, String col) {
 	TextComponent message = new TextComponent(Message);
 	message.setColor(ChatColor.of(color.getGrads(col).get(0)));
-	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor set "+col ) );
+	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor setg "+col ) );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( ChatColor.AQUA+"Set your chat to this color" ) ) );
 	return message;
 }

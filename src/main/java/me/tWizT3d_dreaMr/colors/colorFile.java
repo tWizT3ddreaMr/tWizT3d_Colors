@@ -141,13 +141,13 @@ public static ArrayList<String> colorcommand() {
 	temp="  ";
 	for(String s:color.getGradCodes()) {
 		
-		if(i==4) {
-			temp=temp+color.getGrads(s).get(0)+"&"+s+color.ColorfyString("&"+s+"||||||", null, "command", "&");
+		if(i==3) {
+			temp=temp+ChatColor.of(color.getGrads(s).get(0))+"&"+s+color.ColorfyString("&"+s+"||||||", null, "command", "&");
 			ret.add(temp);
 			temp="  ";
 			i=0;
 		}else {
-			temp=temp+color.getGrads(s).get(0)+"&"+s+ color.ColorfyString("&"+s+"||||||", null, "command", "&");
+			temp=temp+ChatColor.of(color.getGrads(s).get(0))+"&"+s+ color.ColorfyString("&"+s+"||||||", null, "command", "&")+", ";
 			i++;
 		}
 	

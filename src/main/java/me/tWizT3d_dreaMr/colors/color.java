@@ -42,11 +42,8 @@ hex2= hexs.substring(0,6);
 hexs= hexs.substring(6);
 hexs="#"+hexs;
 hex2="#"+hex2;
-System.out.println(hexs);
-System.out.println(hex2);
 if((Formatter.isHex("&"+hexs)||hexs.equalsIgnoreCase("#random"))&&(Formatter.isHex("&"+hex2)||hexs.equalsIgnoreCase("#random"))) {
-	System.out.println(hexs);
-	String[] end= new String[] {hexs, hex2};
+	String[] end= new String[] {hex2, hexs};
 	if(end != null) {
 		grads.put(key, end);
 	}
@@ -65,7 +62,6 @@ public static ArrayList<String> getGrads(String key) {
 	String[] get=grads.get(key);
 	ArrayList<String> ret=new ArrayList<String>();
 	for(String s:get) {
-		System.out.println(s);
 		if(s.equalsIgnoreCase("#random")) 
 			s="#"+randomHexString();
 		ret.add(s);
@@ -144,10 +140,14 @@ for(String key: grads.keySet()) {
 		String[]hxs=grads.get(key);
 		String[]hxs2=new String[] {hxs[0],hxs[1]};
 
-		if(hxs2[0].equalsIgnoreCase("#random")) 
+		if(hxs2[0].equalsIgnoreCase("#random")) {
 			hxs2[0]="#"+randomHexString();
-		if(hxs2[1].equalsIgnoreCase("#random")) 
+			System.out.println(hxs2[0].replace("#", ""));
+		}
+		if(hxs2[1].equalsIgnoreCase("#random")) {
 			hxs2[1]="#"+randomHexString();
+			System.out.println(hxs2[1].replace("#", ""));
+		}
 		message=beg+gradientItem.gradString(hxs2, message);
 	}
 }
