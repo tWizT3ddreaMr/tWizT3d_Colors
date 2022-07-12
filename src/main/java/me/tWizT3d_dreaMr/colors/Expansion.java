@@ -115,6 +115,9 @@ public class Expansion extends PlaceholderExpansion {
         if(identifier.equals("prefix")){
             return color.ColorfyString(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%vault_prefix%")),null, null, "!");
         }
+        if(identifier.equals("nick")){
+            return color.ColorfyString(Formatter.formatnp(PlaceholderAPI.setPlaceholders(player, "%essentials_nickname%")),null, null, "!");
+        }
 
         // %someplugin_placeholder2%
         if(identifier.equals("suffix")){

@@ -135,7 +135,7 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 						p.sendMessage(color.ColorfyString("!cYou cannot set your color to !"+args[1]+"this color",null,null,"!"));
 						return true;
 					}
-					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix &"+args[1]);
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix !"+args[1]);
 					p.sendMessage(color.ColorfyString("!bYou have set your chatcolor to !"+args[1]+"this color",null,null,"!"));
 					return true;
 				}

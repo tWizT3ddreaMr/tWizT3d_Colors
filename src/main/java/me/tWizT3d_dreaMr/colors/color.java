@@ -118,14 +118,16 @@ public static void init() {
 public static boolean isColor(String s) {
 	return colors.containsKey(s);
 }public static boolean isGrad(String s) {
-	return grads.containsKey(s.replace("&", ""));
+	return grads.containsKey(s.replace("&", ""))||grads.containsKey(s.replace("!", ""));
 }
 public static boolean isRandomColor(String s) {
 	return colors.get(s)==null;
 }
 public static String replaceAllGrad(String s) {
-	for(String key:grads.keySet())
+	for(String key:grads.keySet()) {
 		s=s.replace("&"+key, "");
+		s=s.replace("!"+key, "");
+	}
 	return s;
 }
 
@@ -149,6 +151,8 @@ for(String key: grads.keySet()) {
 			System.out.println(hxs2[1].replace("#", ""));
 		}
 		message=beg+gradientItem.gradString(hxs2, message);
+		if(hxs[1].equalsIgnoreCase("#random")) 
+			System.out.println(message);
 	}
 }
 for(String key: colors.keySet()) {
@@ -171,6 +175,8 @@ if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect
 	message=message.replace("&o", "");
 }
 if(p != null && (!Action.equalsIgnoreCase("chat")||p.hasPermission("tc.Chat.Defaults")))
+	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
+else if(p==null)
 	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
 return message;
 }
