@@ -26,7 +26,7 @@ public static void Command(Player p) {
 		}
 		TextComponent Builder=new TextComponent("");
 		int i=0;
-		List<String> colors=new ArrayList<String>();
+		List<String> colors=new ArrayList<>();
 		colors.add("a");colors.add("b");colors.add("c");
 		colors.add("d");colors.add("e");colors.add("f");
 		colors.add("1");colors.add("2");colors.add("3");

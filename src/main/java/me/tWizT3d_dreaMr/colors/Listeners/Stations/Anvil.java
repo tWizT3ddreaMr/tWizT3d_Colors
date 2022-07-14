@@ -19,7 +19,7 @@ import me.tWizT3d_dreaMr.colors.color;
    @EventHandler(priority=EventPriority.MONITOR)
    public void onInventoryClick(InventoryClickEvent e) { if (!e.isCancelled()) {
        HumanEntity ent = e.getWhoClicked();
-       if ((ent instanceof Player)&&(((Player)ent).hasPermission("Colorme.h.Anvil")||((Player)ent).hasPermission("Colorme.H"))) {
+       if ((ent instanceof Player)&&(ent.hasPermission("Colorme.h.Anvil")|| ent.hasPermission("Colorme.H"))) {
          Inventory inv = e.getInventory();
          if ((inv instanceof AnvilInventory)) {
            InventoryView view = e.getView();

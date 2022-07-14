@@ -1,10 +1,4 @@
 
-*.class
-*.prefs
-*.properties
-.project
-.classpath
-*.bat
-target/*
-/bin/
-/target/
+target/
+bin/
+.idea/

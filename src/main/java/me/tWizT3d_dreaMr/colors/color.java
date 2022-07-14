@@ -15,8 +15,6 @@ public class color {
 private static HashMap<String, ChatColor> colors;
 private static HashMap<String, String[]> grads;
 public static void addColor(String key, String hex) {
-//	if(colors == null)
-	//	colors=new HashMap<String, ChatColor>();
 if(hex.equalsIgnoreCase("random")) {
 	colors.put(key, null);
 }
@@ -31,9 +29,7 @@ if(Formatter.isHex(hex)) {
 	}
 } 
 }public static void addGrad(String key, String hexs) {
-//	if(colors == null)
-//	colors=new HashMap<String, ChatColor>();
-String hex2= "";
+String hex2;
 key= key.replace("&", "");
 hexs= hexs.replace("#", "");
 hexs= hexs.replace(" ", "");
@@ -44,9 +40,7 @@ hexs="#"+hexs;
 hex2="#"+hex2;
 if((Formatter.isHex("&"+hexs)||hexs.equalsIgnoreCase("#random"))&&(Formatter.isHex("&"+hex2)||hexs.equalsIgnoreCase("#random"))) {
 	String[] end= new String[] {hex2, hexs};
-	if(end != null) {
-		grads.put(key, end);
-	}
+	grads.put(key, end);
 } 
 }
 public static ChatColor getColor(String key) {
@@ -60,7 +54,7 @@ return get;
 public static ArrayList<String> getGrads(String key) {
 	key= key.replace("&", "");
 	String[] get=grads.get(key);
-	ArrayList<String> ret=new ArrayList<String>();
+	ArrayList<String> ret= new ArrayList<>();
 	for(String s:get) {
 		if(s.equalsIgnoreCase("#random")) 
 			s="#"+randomHexString();
@@ -85,22 +79,21 @@ return ChatColor.of(hex);
 }
 public static String randomHexString() {
 String characters ="abcdef1234567890";
-String hex="";
+StringBuilder hex= new StringBuilder();
 while(hex.length()!=6){
 	int r=random(characters.length());
 		if(r!=characters.length())
-			hex=hex+characters.substring(r,r+1);
+			hex.append(characters.charAt(r));
 		else
-			hex=hex+characters.substring(r);
+			hex.append(characters.substring(r));
 }
-return hex;
+return hex.toString();
 	
 }
 
 private static int random(int x){
 Random randomGenerator = new Random();
-int	rand = randomGenerator.nextInt((x+1));
-return rand;
+return randomGenerator.nextInt((x+1));
 }
 public static Set<String> getColorsCodes() {
 return colors.keySet();
@@ -112,8 +105,8 @@ public static Collection<ChatColor> getColors() {
 return colors.values();
 }
 public static void init() {
-	colors= new HashMap<String, ChatColor>();
-	grads= new HashMap<String, String[]>();
+	colors= new HashMap<>();
+	grads= new HashMap<>();
 }
 public static boolean isColor(String s) {
 	return colors.containsKey(s);

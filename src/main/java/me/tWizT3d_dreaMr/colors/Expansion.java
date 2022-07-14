@@ -12,7 +12,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
  */
 public class Expansion extends PlaceholderExpansion {
 
-    private Plugin plugin;
+    private final Plugin plugin;
 
     /**
      * Since we register the expansion inside our own plugin, we
@@ -39,7 +39,7 @@ public class Expansion extends PlaceholderExpansion {
     }
 
     /**
-     * Because this is a internal class, this check is not needed
+     * Because this is an internal class, this check is not needed,
      * and we can simply return {@code true}
      *
      * @return Always true since it's an internal class.
@@ -51,7 +51,7 @@ public class Expansion extends PlaceholderExpansion {
 
     /**
      * The name of the person who created this expansion should go here.
-     * <br>For convienience do we return the author from the plugin.yml
+     * <br>For convenience do we return the author from the plugin.yml
      * 
      * @return The name of the author as a String.
      */
@@ -78,7 +78,7 @@ public class Expansion extends PlaceholderExpansion {
      * This is the version of the expansion.
      * <br>You don't have to use numbers, since it is set as a String.
      *
-     * For convienience do we return the version from the plugin.yml
+     * For convenience do we return the version from the plugin.yml
      *
      * @return The version as a String.
      */

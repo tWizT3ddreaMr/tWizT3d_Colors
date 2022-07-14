@@ -1,26 +1,23 @@
  package me.tWizT3d_dreaMr.colors;
-import java.util.List;
-import java.util.Set;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+ import me.tWizT3d_dreaMr.colors.Listeners.Chat;
+ import me.tWizT3d_dreaMr.colors.Listeners.Commands;
+ import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
+ import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
+ import net.md_5.bungee.api.ChatColor;
+ import org.bukkit.Bukkit;
+ import org.bukkit.command.Command;
+ import org.bukkit.command.CommandSender;
+ import org.bukkit.configuration.file.FileConfiguration;
+ import org.bukkit.entity.Player;
+ import org.bukkit.plugin.Plugin;
 
-import me.tWizT3d_dreaMr.colors.Listeners.Chat;
-import me.tWizT3d_dreaMr.colors.Listeners.Commands;
-import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
-import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
-import net.md_5.bungee.api.ChatColor;
+ import java.util.List;
  
  public class main extends org.bukkit.plugin.java.JavaPlugin
  {
  public static FileConfiguration config;
  public static Plugin plugin;
- public static boolean mute;
- public static Set<String> pinatas;
 public void onEnable() {
 	LangHandler.enable();
 	colorFile.enable();
@@ -56,12 +53,11 @@ if (command.getName().equalsIgnoreCase("grad")) {
 			return true;
 		}
 		gradientItem.gothrough(args, (Player) sender);
-		return true;
-		}
+	}
 	else {
 		sender.sendMessage(LangHandler.get("General","Incorrect",null,null));
-		return true;
 	}
+	return true;
 }
 if (command.getName().equalsIgnoreCase("colorme")) {
 	if (sender instanceof Player) {
@@ -74,7 +70,7 @@ if (command.getName().equalsIgnoreCase("colorme")) {
 		sender.sendMessage(LangHandler.get("General","Incorrect",null,null));
 		return true;
 	}
-	if(!(args[1].length()==6&&args[1].matches("([a-fA-F0-9]{6})"))) {
+	if(!(args[1].length()==6&&args[1].matches("([a-fA-F\\d]{6})"))) {
 		sender.sendMessage(LangHandler.get("General","Incorrect",null,null));
 		return true;
 	}
@@ -91,15 +87,14 @@ if(command.getName().equalsIgnoreCase("colors")) {
 	return true;
 }
 if(command.getName().equalsIgnoreCase("setcolor")) {
-	if(sender instanceof Player) {
-			Player p=(Player)sender;
-			if(args.length==0) {
+	if(sender instanceof Player p) {
+		if(args.length==0) {
 				ChatGui.Command(p);return true;
 			}
 		if(args.length==1) {
 			if(args[0].equalsIgnoreCase("remove")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix \"\"");
-				p.sendMessage(ChatColor.RED+"You have removed your color");
+				p.sendMessage(ChatColor.RED +"You have removed your color");
 				return true;
 			} 
 			sender.sendMessage("Incorrect format");return true;
@@ -137,12 +132,11 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 					}
 					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user "+p.getName()+" suffix !"+args[1]);
 					p.sendMessage(color.ColorfyString("!bYou have set your chatcolor to !"+args[1]+"this color",null,null,"!"));
-					return true;
 				}
 				else {
 					p.sendMessage(ChatColor.RED+"That is not a gradient");
-					return true;
 				}
+				return true;
 			}
 			sender.sendMessage("Incorrect format");
 			return true;

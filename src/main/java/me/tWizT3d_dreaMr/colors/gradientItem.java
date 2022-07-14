@@ -1,6 +1,7 @@
 package me.tWizT3d_dreaMr.colors;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
@@ -13,26 +14,27 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class gradientItem {
 	public static void gothrough(String[] args, Player p) {
 		ItemStack item=p.getInventory().getItemInMainHand();
 		if(!item.hasItemMeta()) {
-			p.sendMessage(ChatColor.RED+"Your item doesnt have lore.");
+			p.sendMessage(ChatColor.RED+"Your item doesn't have lore.");
 			return;
 			}
 		ItemMeta im=item.getItemMeta();
 		if(!im.hasLore()) {
-			p.sendMessage(ChatColor.RED+"Your item doesnt have lore.");
+			p.sendMessage(ChatColor.RED+"Your item doesn't have lore.");
 			return;
 			}
 		//TODO replace with actual lore
 		List<String> lorlis=im.getLore();
 		
-		String[] lore = lorlis.toArray(new String[lorlis.size()]);
+		String[] lore = lorlis.toArray(new String[0]);
 		lorlis.toArray(lore);
 		
 		//
-		ArrayList<String> hexes=new ArrayList<String>();
+		ArrayList<String> hexes= new ArrayList<>();
 		if(args.length==4) {
 			hexes.add(args[0]);
 			hexes.add(args[1]);
@@ -80,10 +82,8 @@ public class gradientItem {
 			p.sendMessage(ChatColor.GREEN+"Something went wrong! return is null");
 			return;
 		}
-		List<String> endLore= new ArrayList<String>();
-		for(String l: lore) {
-			endLore.add(l);
-		}
+		List<String> endLore= new ArrayList<>();
+		Collections.addAll(endLore, lore);
 		im.setLore(endLore);
 		item.setItemMeta(im);
 		p.sendMessage(ChatColor.GREEN+"Your lore has been updated.");
@@ -105,29 +105,28 @@ public class gradientItem {
 			i++;
 		}
 		String[] end=comgra(strings, 1, ls.length, ls);
-		String fin="";
+		StringBuilder fin= new StringBuilder();
 		for(String s:end)
-			fin=fin+s;
+			fin.append(s);
 		st=fin+ep;
 		
 		return st;
 	}
 
 	public static String[] comgra(String[] strings, int start, int end, String[] lore) {
-		Integer loch=Math.max(start, end);
-		Integer locl=Math.min(start, end);
+		int loch=Math.max(start, end);
+		int locl=Math.min(start, end);
 		int dif=loch-locl;
 		int garsize=dif;
-		
-		ArrayList<String> grabass=new ArrayList<String>();
-			ArrayList<String> temp;
+
+		ArrayList<String> temp;
 			temp=GraMe(strings[0],strings[1],garsize);
 			
 			if(temp == null) {
 				Bukkit.getLogger().log(Level.WARNING, "H1 or H2 null");//in lang
 				return null;
 			}
-			grabass.addAll(temp);
+		ArrayList<String> grabass = new ArrayList<>(temp);
 
 
 
@@ -141,20 +140,19 @@ public class gradientItem {
 	}	
 
 	public static String[] comgra2(ArrayList<String> hexes, int start, int end, String[] lore) {
-		Integer loch=Math.max(start, end);
-		Integer locl=Math.min(start, end);
+		int loch=Math.max(start, end);
+		int locl=Math.min(start, end);
 		int dif=loch-locl;
 		int garsize=dif;
-		
-		ArrayList<String> grabass=new ArrayList<String>();
-			ArrayList<String> temp;
+
+		ArrayList<String> temp;
 			temp=GraMe(hexes.get(0),hexes.get(1),garsize);
 			
 			if(temp == null) {
 				Bukkit.getLogger().log(Level.WARNING, "H1 or H2 null");//in lang
 				return null;
 			}
-			grabass.addAll(temp);
+		ArrayList<String> grabass = new ArrayList<>(temp);
 		
 
 		for(String hx:grabass) {
@@ -162,18 +160,18 @@ public class gradientItem {
 			lore[locl-1]=""+hx+ChatColor.stripColor(lore[locl-1]);
 			locl++;
 		}
-		return (String[]) lore;
+		return lore;
 	}	
 	public static String[] comgra3(ArrayList<String> hexes, int start, int end, String[] lore) {
 
 
-		Integer loch=Math.max(start, end)-1;
-		Integer locl=Math.min(start, end);
+		int loch=Math.max(start, end)-1;
+		int locl=Math.min(start, end);
 		int dif=loch-locl;
 		int garsize=dif/2;
 		int gardif=dif%2;
 		
-		ArrayList<String> grabass=new ArrayList<String>();
+		ArrayList<String> grabass= new ArrayList<>();
 		for(int n=0;n<2;n++) {
 			ArrayList<String> temp;
 			if(gardif>0) {
@@ -196,11 +194,11 @@ public class gradientItem {
 			lore[locl-1]=""+hx+ChatColor.stripColor(lore[locl-1]);
 			locl++;
 		}
-		return (String[]) lore;
+		return lore;
 	}	
 
 	public static ArrayList<String> GraMe(String h2,String h1,int garsize){
-		ArrayList<String> graout=new ArrayList<String>();
+		ArrayList<String> graout= new ArrayList<>();
 		
 		h1=h1.replace("#", "");
 		h1=h1.replace("&", "");
@@ -257,7 +255,7 @@ public class gradientItem {
 		return graout;
 		}
 	public static ArrayList<Integer> numes(Integer a, Integer b, int gs){
-		ArrayList<Integer> out=new ArrayList<Integer>();
+		ArrayList<Integer> out= new ArrayList<>();
 		int dif=a-b;
 		if(dif==0) {
 			for(int i=0;i<(gs+1);i++) {
@@ -273,14 +271,12 @@ public class gradientItem {
 		}
 		return out;
 	}
-	private static final Pattern pattern = Pattern.compile("(?<!\\\\)(#[a-fA-F0-9]{6})");
+	private static final Pattern pattern = Pattern.compile("(?<!\\\\)(#[a-fA-F\\d]{6})");
 
 		  
 	public static boolean ishex(String message) {
 		Matcher matcher = pattern.matcher(message);
-		if(matcher.find()) {
-			return true; 
-		}
-		return false;
+		return matcher.find();
+
 	}
 }

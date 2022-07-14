@@ -42,7 +42,7 @@ if(!config.contains("Server")) {
 }
 public static void setColor(Player player, String list){
 
-List<String> color = new ArrayList<String>();
+List<String> color = new ArrayList<>();
 Scanner scan=new Scanner(list);int i=0;
 while(scan.hasNext()) {
 	String temp=scan.next();
@@ -66,7 +66,7 @@ try {
 	}
 }
 public static void setColorserv(String list){
-List<String> color = new ArrayList<String>();
+List<String> color = new ArrayList<>();
 Scanner scan=new Scanner(list);int i=0;
 while(scan.hasNext()) {
 	String temp=scan.next();

@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import net.md_5.bungee.api.ChatColor;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class colorFile {
 	private static File Config;
 	private static YamlConfiguration config;
@@ -86,7 +87,7 @@ public class colorFile {
 	}
 	private static void createDef2() {
 		ColorCodeFileconfig.set("identifier", "&");
-		ArrayList<String> ret= new ArrayList<String>();
+		ArrayList<String> ret= new ArrayList<>();
 		ret.add("!z!m                                                 ");
 		ret.add("        !c!lM!e!li!a!ln!b!le!9!lc!d!lr!c!la!e!lf!a!lt!b!l !9!lC!d!lo!c!ll!e!lo!a!lr!b!l !9!lC!d!lo!c!ld!e!le!a!ls");
 		ret.add("  &f "+"&1 "+"&2 "+"&3 "
@@ -99,7 +100,7 @@ public class colorFile {
 		ret.add("         "+"!zC"+"!zu"+"!zs"+"!zt"+"!zo"+"!zm"+" "+"!zC"+"!zo"+"!zl"+"!zo"+"!zr"+"!zs");
 		ColorCodeFileconfig.set("Start", ret);
 
-		ArrayList<String> ret2= new ArrayList<String>();
+		ArrayList<String> ret2= new ArrayList<>();
 		ret2.add("!z!m                                                 ");
 		ret2.add(ChatColor.translateAlternateColorCodes('&',"&3* &f&lCustoms with ** is random."));
 		ret2.add("!z!m                                                 ");
@@ -109,51 +110,51 @@ public class colorFile {
 @SuppressWarnings("unchecked")
 public static ArrayList<String> colorcommand() {
 
-	ArrayList<String> ret=new ArrayList<String>();
+	ArrayList<String> ret= new ArrayList<>();
 	for(String s:(List<String>) ColorCodeFileconfig.getList("Start"))
 		ret.add(setT(s));
 	
 	int i=1;
-	String temp="  ";
+	StringBuilder temp= new StringBuilder("  ");
 
 	for(String s:color.getColorsCodes()) {
 			
 			if(i==8) {
 				if(color.isRandomColor(s))
-					temp=temp+r()+"&"+s+"** ";
+					temp.append(r()).append("&").append(s).append("** ");
 				else 
-					temp=temp+color.getColor(s)+"&"+s;
-				ret.add(temp);
-				temp="  ";
+					temp.append(color.getColor(s)).append("&").append(s);
+				ret.add(temp.toString());
+				temp = new StringBuilder("  ");
 				i=0;
 			}else {
 				if(color.isRandomColor(s))
-					temp=temp+r()+"&"+s+"** ";
+					temp.append(r()).append("&").append(s).append("** ");
 				else 
-					temp=temp+color.getColor(s)+"&"+s+" ";
+					temp.append(color.getColor(s)).append("&").append(s).append(" ");
 				i++;
 			}
 		
 	}
-	if(!temp.equals("  ")) {
-		ret.add(temp);
+	if(!temp.toString().equals("  ")) {
+		ret.add(temp.toString());
 	}
-	temp="  ";
+	temp = new StringBuilder("  ");
 	for(String s:color.getGradCodes()) {
 		
 		if(i==3) {
-			temp=temp+ChatColor.of(color.getGrads(s).get(0))+"&"+s+color.ColorfyString("&"+s+"||||||", null, "command", "&");
-			ret.add(temp);
-			temp="  ";
+			temp.append(ChatColor.of(color.getGrads(s).get(0))).append("&").append(s).append(color.ColorfyString("&" + s + "||||||", null, "command", "&"));
+			ret.add(temp.toString());
+			temp = new StringBuilder("  ");
 			i=0;
 		}else {
-			temp=temp+ChatColor.of(color.getGrads(s).get(0))+"&"+s+ color.ColorfyString("&"+s+"||||||", null, "command", "&")+", ";
+			temp.append(ChatColor.of(color.getGrads(s).get(0))).append("&").append(s).append(color.ColorfyString("&" + s + "||||||", null, "command", "&")).append(", ");
 			i++;
 		}
 	
 }
-if(!temp.equals("  ")) {
-	ret.add(temp);
+if(!temp.toString().equals("  ")) {
+	ret.add(temp.toString());
 }
 	
 	for(String s:(List<String>) ColorCodeFileconfig.getList("End"))
@@ -194,16 +195,7 @@ public static String setT(String s) {
 	s= s.replace(identifier+"n", ChatColor.UNDERLINE+"&n"+ChatColor.WHITE);
 	s= s.replace(identifier+"o", ChatColor.ITALIC+"&o"+ChatColor.WHITE);
 	s= s.replace(identifier+"r", ChatColor.WHITE+"&r"+ChatColor.WHITE);
-	/*ret.add(ChatColor.WHITE+"  &f "+ChatColor.DARK_BLUE+"&1 "+ChatColor.DARK_GREEN+"&2 "+ChatColor.DARK_AQUA+"&3 "
-			+ChatColor.DARK_RED+"&4 "+ChatColor.DARK_PURPLE+"&5 "+ChatColor.GOLD+"&6 "+ChatColor.GRAY+"&7 ");
-	ret.add(ChatColor.DARK_GRAY+" &8 "+ChatColor.BLUE+"&9 "+ChatColor.YELLOW+"&e "+ChatColor.LIGHT_PURPLE+"&d "
-			+ChatColor.RED+"&c "+ChatColor.AQUA+"&b "+ChatColor.GREEN+"&a "+ChatColor.BLACK+"&0* ");
-	ret.add(ChatColor.WHITE+"        &l"+ChatColor.BOLD+" BOLD "+ChatColor.WHITE+"&o "+ChatColor.ITALIC+"ITALIC");
-	ret.add(ChatColor.WHITE+"   &m "+ChatColor.STRIKETHROUGH+"STRIKE"+ChatColor.WHITE+" &n "+ChatColor.UNDERLINE+"ULINE"+ChatColor.WHITE+" &r");
-	ret.add(""+r()+ChatColor.STRIKETHROUGH+"                                                 ");
-	ret.add("         "+r()+"C"+r()+"u"+r()+"s"+r()+"t"+r()+"o"+r()+"m"+r()+" "+r()+"C"+r()+"o"+r()+"l"+r()+"o"+r()+"r"+r()+"s");
-	int i=1;*/
-	
+
 	return s;
 }
 public static void addColor(String code, String Hex) {
