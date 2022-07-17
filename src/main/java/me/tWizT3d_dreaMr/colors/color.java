@@ -166,6 +166,9 @@ if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect
 	message=message.replace("&m", "");
 	message=message.replace("&n", "");
 	message=message.replace("&o", "");
+	message=message.replace("&a", "");
+	message=message.replace("&b", "");
+	message=message.replace("&0", "");
 }
 if(p != null && (!Action.equalsIgnoreCase("chat")||p.hasPermission("tc.Chat.Defaults")))
 	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);
