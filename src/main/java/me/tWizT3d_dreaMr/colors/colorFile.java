@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import net.md_5.bungee.api.ChatColor;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class colorFile {
 	private static File Config;
 	private static YamlConfiguration config;

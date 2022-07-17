@@ -126,8 +126,15 @@ public static String replaceAllGrad(String s) {
 
 public static String ColorfyString(String message, Player p, String Action, String Char) {
 for(String key: grads.keySet()) {
-	if(p != null && !(p.hasPermission("tcg."+Action+"."+key)))
+	boolean pn=p!=null;
+	if(pn && !(p.hasPermission("tcg."+Action+"."+key)))
 		continue;
+	if(pn && main.isOFfilterOn() && Action.equalsIgnoreCase("chat") 
+			&& !p.hasPermission("coreprotect.inspect")) {
+		for(String fi:main.oFilter()) {
+			message=message.replace("&"+fi, "");
+		}
+	}
 	while(message.contains(Char+key)) {
 		String beg=message.substring(0, message.indexOf(Char+key));
 		message=message.substring(message.indexOf(Char+key));
@@ -160,15 +167,11 @@ for(String key: colors.keySet()) {
 			message=message.replace(Char+key, ""+getColor(key));
 	}
 }
-if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect.inspect") && main.isFilterOn()) {
-	message=message.replace("&l", "");
-	message=message.replace("&k", "");
-	message=message.replace("&m", "");
-	message=message.replace("&n", "");
-	message=message.replace("&o", "");
-	message=message.replace("&a", "");
-	message=message.replace("&b", "");
-	message=message.replace("&0", "");
+if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect.inspect") 
+	&& main.isFFilterOn()) {	
+	for(String fi:main.fFilter()) {
+		message=message.replace("&"+fi, "");
+	}
 }
 if(p != null && (!Action.equalsIgnoreCase("chat")||p.hasPermission("tc.Chat.Defaults")))
 	message=ChatColor.translateAlternateColorCodes(Char.toCharArray()[0], message);

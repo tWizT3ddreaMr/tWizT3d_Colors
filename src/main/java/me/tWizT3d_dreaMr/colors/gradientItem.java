@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class gradientItem {
 	public static void gothrough(String[] args, Player p) {
 		ItemStack item=p.getInventory().getItemInMainHand();

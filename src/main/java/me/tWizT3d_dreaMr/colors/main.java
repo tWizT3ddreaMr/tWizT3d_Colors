@@ -12,12 +12,17 @@
  import org.bukkit.entity.Player;
  import org.bukkit.plugin.Plugin;
 
- import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
  
  public class main extends org.bukkit.plugin.java.JavaPlugin
  {
  public static FileConfiguration config;
  public static Plugin plugin;
+ private static boolean bFFilter;
+ private static boolean bOFilter;
+ private static ArrayList<String> OFilter;
+ private static ArrayList<String> FFilter;
 public void onEnable() {
 	LangHandler.enable();
 	colorFile.enable();
@@ -32,13 +37,26 @@ public void onEnable() {
 	Bukkit.getPluginManager().registerEvents(new Anvil(), this);
 	Bukkit.getPluginManager().registerEvents(new Commands(), this);
 	Bukkit.getPluginManager().registerEvents(new Signs(), this);
+	OFilter= new ArrayList<>();
+	OFilter.add("Staff");
+	FFilter.add("l");
+	config.addDefault("FormatFilter.enable", true);
+	config.addDefault("FormatFilter.filtered", FFilter);
+	config.addDefault("OtherFilter.enable", true);
+	config.addDefault("OtherFilter.filtered", OFilter);
+	OFilter.clear();
+	FFilter.clear();
 	
-	config.addDefault("FormatFilter", true);
 	config.options().copyDefaults(true);
 	saveConfig();
+	
 	if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 		new Expansion(this).register();
 	}
+	OFilter.addAll(config.getStringList("OtherFilter.filtered"));
+	FFilter.addAll(config.getStringList("FormatFilter.filtered"));
+	bOFilter=config.getBoolean("OtherFilter.enable");
+	bFFilter=config.getBoolean("FormatFilter.enable");
 }
  
 public void onDisable() {}
@@ -148,8 +166,17 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 }
 return false;
 }
-public static boolean isFilterOn() {
-	return config.getBoolean("FormatFilter");
+public static boolean isFFilterOn() {
+	return bFFilter;
+}
+public static ArrayList<String> oFilter() {
+	return OFilter;
+}
+public static ArrayList<String> fFilter() {
+	return FFilter;
+}
+public static boolean isOFfilterOn() {
+	return bOFilter;
 }
 }
 
