@@ -104,6 +104,12 @@ public static TextComponent MessageBuilder(String Message,String hex,String col)
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( ChatColor.AQUA+"Set your chat to this color" ) ) );
 	return message;
 }
+public static TextComponent MessageBuilder2(String Message,String col) {
+	TextComponent message = new TextComponent(Message);
+	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor set "+col ) );
+	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( color.getColor(col)+"Set your chat to this color" ) ) );
+	return message;
+}
 public static TextComponent MessageBuilderGrad1(String Message, String col) {
 	TextComponent message = new TextComponent(Message);
 	message.setColor(ChatColor.of(color.getGrads(col).get(0)));
@@ -116,12 +122,6 @@ public static TextComponent MessageBuilderGrad2(String Message, String col) {
 	message.setColor(ChatColor.of(color.getGrads(col).get(1)));
 	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor setg "+col ) );
 	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( ChatColor.AQUA+"Set your chat to this color" ) ) );
-	return message;
-}
-public static TextComponent MessageBuilder2(String Message,String col) {
-	TextComponent message = new TextComponent(Message);
-	message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/setcolor setg "+col ) );
-	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text( color.getColor(col)+"Set your chat to this color" ) ) );
 	return message;
 }
 public static TextComponent fin() {
