@@ -109,7 +109,7 @@ public static void init() {
 	grads= new HashMap<>();
 }
 public static boolean isColor(String s) {
-	return colors.containsKey(s);
+	return colors.containsKey(s) || "abcdef123456789".contains(s);
 }public static boolean isGrad(String s) {
 	return grads.containsKey(s.replace("&", ""))||grads.containsKey(s.replace("!", ""));
 }
@@ -132,7 +132,7 @@ for(String key: grads.keySet()) {
 	if(pn && main.isOFfilterOn() && Action.equalsIgnoreCase("chat") 
 			&& !p.hasPermission("coreprotect.inspect")) {
 		for(String fi:main.oFilter()) {
-			message=message.replace("&"+fi, "");
+			message=message.replaceAll("(?i)&"+fi, "");
 		}
 	}
 	while(message.contains(Char+key)) {
@@ -170,7 +170,7 @@ for(String key: colors.keySet()) {
 if(p != null && Action.equalsIgnoreCase("chat") && !p.hasPermission("coreprotect.inspect") 
 	&& main.isFFilterOn()) {	
 	for(String fi:main.fFilter()) {
-		message=message.replace("&"+fi, "");
+		message=message.replaceAll("(?i)&"+fi, "");
 	}
 }
 if(p != null && (!Action.equalsIgnoreCase("chat")||p.hasPermission("tc.Chat.Defaults")))

@@ -38,12 +38,13 @@ public void onEnable() {
 	Bukkit.getPluginManager().registerEvents(new Commands(), this);
 	Bukkit.getPluginManager().registerEvents(new Signs(), this);
 	OFilter= new ArrayList<>();
+	FFilter= new ArrayList<>();
 	OFilter.add("Staff");
 	FFilter.add("l");
-	config.addDefault("FormatFilter.enable", true);
-	config.addDefault("FormatFilter.filtered", FFilter);
-	config.addDefault("OtherFilter.enable", true);
-	config.addDefault("OtherFilter.filtered", OFilter);
+	config.addDefault("FormatFilter.Enable", true);
+	config.addDefault("FormatFilter.Filtered", FFilter);
+	config.addDefault("OtherFilter.Enable", true);
+	config.addDefault("OtherFilter.Filtered", OFilter);
 	OFilter.clear();
 	FFilter.clear();
 	
@@ -53,10 +54,10 @@ public void onEnable() {
 	if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 		new Expansion(this).register();
 	}
-	OFilter.addAll(config.getStringList("OtherFilter.filtered"));
-	FFilter.addAll(config.getStringList("FormatFilter.filtered"));
-	bOFilter=config.getBoolean("OtherFilter.enable");
-	bFFilter=config.getBoolean("FormatFilter.enable");
+	OFilter.addAll(config.getStringList("OtherFilter.Filtered"));
+	FFilter.addAll(config.getStringList("FormatFilter.Filtered"));
+	bOFilter=config.getBoolean("OtherFilter.Enable");
+	bFFilter=config.getBoolean("FormatFilter.Enable");
 }
  
 public void onDisable() {}
