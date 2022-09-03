@@ -1,7 +1,8 @@
  package me.tWizT3d_dreaMr.colors;
 
  import me.tWizT3d_dreaMr.colors.Listeners.Chat;
- import me.tWizT3d_dreaMr.colors.Listeners.Commands;
+import me.tWizT3d_dreaMr.colors.Listeners.Chat2;
+import me.tWizT3d_dreaMr.colors.Listeners.Commands;
  import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
  import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
  import net.md_5.bungee.api.ChatColor;
@@ -23,6 +24,7 @@ import java.util.List;
  private static boolean bOFilter;
  private static ArrayList<String> OFilter;
  private static ArrayList<String> FFilter;
+ private static boolean venture;
 public void onEnable() {
 	LangHandler.enable();
 	colorFile.enable();
@@ -32,6 +34,13 @@ public void onEnable() {
 	plugin=this;
 	config = getConfig();
 	
+	venture=true;
+	if(Bukkit.getPluginManager().getPlugin("VentureChat")==null) {
+		venture=false;
+		Bukkit.getPluginManager().registerEvents(new Chat2(), this);
+	}
+	else 
+		Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	me.tWizT3d_dreaMr.colors.configHandler.enable();
 	Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	Bukkit.getPluginManager().registerEvents(new Anvil(), this);
@@ -63,6 +72,9 @@ public void onEnable() {
 public void onDisable() {}
 public List<String> onTabComplete(CommandSender sender , Command cmd, String CommandLabel, String[] args){
 	return null;
+}
+public static boolean isVentureEnable() {
+	return venture;
 }
 public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 if (command.getName().equalsIgnoreCase("grad")) {

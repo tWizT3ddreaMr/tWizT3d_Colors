@@ -32,6 +32,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.Aust1n46.VentureChat</groupId>
+            <artifactId>VentureChat</artifactId>
+            <scope>system</scope>
+            <version>any</version>
+            <systemPath>${env.HOME}/dependencies/VentureChat.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.6</version>
