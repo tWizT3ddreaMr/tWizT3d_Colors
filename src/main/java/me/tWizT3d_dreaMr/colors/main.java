@@ -24,7 +24,6 @@ import java.util.List;
  private static boolean bOFilter;
  private static ArrayList<String> OFilter;
  private static ArrayList<String> FFilter;
- private static boolean venture;
 public void onEnable() {
 	LangHandler.enable();
 	colorFile.enable();
@@ -33,14 +32,7 @@ public void onEnable() {
 	saveConfig();
 	plugin=this;
 	config = getConfig();
-	
-	venture=true;
-	if(Bukkit.getPluginManager().getPlugin("VentureChat")==null) {
-		venture=false;
-		Bukkit.getPluginManager().registerEvents(new Chat2(), this);
-	}
-	else 
-		Bukkit.getPluginManager().registerEvents(new Chat(), this);
+
 	me.tWizT3d_dreaMr.colors.configHandler.enable();
 	Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	Bukkit.getPluginManager().registerEvents(new Anvil(), this);
@@ -63,6 +55,12 @@ public void onEnable() {
 	if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 		new Expansion(this).register();
 	}
+	if(Bukkit.getPluginManager().getPlugin("VentureChat") != null) {
+		Bukkit.getPluginManager().registerEvents(new Chat2(), this);
+	}
+	else {
+		Bukkit.getPluginManager().registerEvents(new Chat(), this);
+	}
 	OFilter.addAll(config.getStringList("OtherFilter.Filtered"));
 	FFilter.addAll(config.getStringList("FormatFilter.Filtered"));
 	bOFilter=config.getBoolean("OtherFilter.Enable");
@@ -72,9 +70,6 @@ public void onEnable() {
 public void onDisable() {}
 public List<String> onTabComplete(CommandSender sender , Command cmd, String CommandLabel, String[] args){
 	return null;
-}
-public static boolean isVentureEnable() {
-	return venture;
 }
 public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 if (command.getName().equalsIgnoreCase("grad")) {

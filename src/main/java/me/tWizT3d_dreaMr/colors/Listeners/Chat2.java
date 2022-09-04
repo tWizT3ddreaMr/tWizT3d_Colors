@@ -15,13 +15,14 @@ public class Chat2 implements Listener
  {
 	   @EventHandler(ignoreCancelled=true, priority=EventPriority.LOWEST)
 	   public void chat(AsyncPlayerChatEvent e) {
-
+			/*
 		   MineverseChatPlayer mcp = MineverseChatAPI.getOnlineMineverseChatPlayer(e.getPlayer());
 		   ChatChannel eventChannel = mcp.getCurrentChannel();
 		    if(eventChannel.getName().equalsIgnoreCase("global") &&  color.isGrad(PlaceholderAPI.setPlaceholders(e.getPlayer(), "%vault_suffix%"))&&!e.getMessage().startsWith("#")&&!e.getMessage().startsWith("!")) {
 		    	e.setMessage(color.replaceAllGrad(e.getMessage()));
 		     	e.setMessage(PlaceholderAPI.setPlaceholders(e.getPlayer(), "%vault_suffix%").replace("!", "&")+e.getMessage());
 		    }
+			 */
 			e.setMessage(color.ColorfyString(e.getMessage(), e.getPlayer(), "chat", "&"));
 		}
  }
