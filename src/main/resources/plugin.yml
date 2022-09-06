@@ -35,5 +35,4 @@ permissions:
     Colorme.h.Anvil:
         description: allows the user to change server settings
         default: op
-softdepend:
-   [ PlaceholderAPI ]
+softdepend: [PlaceholderAPI, VentureChat]
