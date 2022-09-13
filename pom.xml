@@ -36,7 +36,7 @@
             <artifactId>VentureChat</artifactId>
             <scope>system</scope>
             <version>any</version>
-            <systemPath>${env.HOME}/dependencies/VentureChat.jar</systemPath>
+            <systemPath>C:/dependencies/VentureChat.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

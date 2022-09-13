@@ -34,7 +34,6 @@ public void onEnable() {
 	config = getConfig();
 
 	me.tWizT3d_dreaMr.colors.configHandler.enable();
-	Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	Bukkit.getPluginManager().registerEvents(new Anvil(), this);
 	Bukkit.getPluginManager().registerEvents(new Commands(), this);
 	Bukkit.getPluginManager().registerEvents(new Signs(), this);
