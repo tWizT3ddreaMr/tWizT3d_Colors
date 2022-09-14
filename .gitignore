@@ -3,3 +3,6 @@ target/
 bin/
 .idea/
 *.bat
+.classpath
+.settings/org.eclipse.jdt.core.prefs
+pom.xml
