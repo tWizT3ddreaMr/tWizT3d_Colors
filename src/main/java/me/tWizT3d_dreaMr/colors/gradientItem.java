@@ -48,7 +48,7 @@ public class gradientItem {
 				p.sendMessage(ChatColor.RED+"Number for start or end is null");
 				return;
 			}
-			if(lorlis.size()>a||lorlis.size()>b)
+			if(lorlis.size()<a && lorlis.size()<b)
 			{
 				p.sendMessage(ChatColor.RED+"Lore not long enough. "+lorlis.size());
 				return;
