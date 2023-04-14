@@ -107,12 +107,16 @@ public class colorFile {
 		ColorCodeFileconfig.set("End", ret2);
 	}
 @SuppressWarnings("unchecked")
-public static ArrayList<String> colorcommand() {
+public static ArrayList<String> colorcommand(boolean custom) {
 
 	ArrayList<String> ret= new ArrayList<>();
 	for(String s:(List<String>) ColorCodeFileconfig.getList("Start"))
 		ret.add(setT(s));
-	
+	if(!custom) {
+		return ret;
+	}
+	for(String s:(List<String>) ColorCodeFileconfig.getList("Middle"))
+		ret.add(setT(s));
 	int i=1;
 	StringBuilder temp= new StringBuilder("  ");
 
