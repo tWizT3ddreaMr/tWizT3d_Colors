@@ -143,19 +143,7 @@ public static ArrayList<String> colorcommand(boolean custom) {
 		ret.add(temp.toString());
 	}
 	temp = new StringBuilder("  ");
-	for(String s:color.getGradCodes()) {
-		
-		if(i==3) {
-			temp.append(ChatColor.of(color.getGrads(s).get(0))).append("&").append(s).append(color.ColorfyString("&" + s + "||||||", null, "command", "&"));
-			ret.add(temp.toString());
-			temp = new StringBuilder("  ");
-			i=0;
-		}else {
-			temp.append(ChatColor.of(color.getGrads(s).get(0))).append("&").append(s).append(color.ColorfyString("&" + s + "||||||", null, "command", "&")).append(", ");
-			i++;
-		}
-	
-}
+
 if(!temp.toString().equals("  ")) {
 	ret.add(temp.toString());
 }
