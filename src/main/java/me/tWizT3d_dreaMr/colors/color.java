@@ -125,6 +125,7 @@ public static String replaceAllGrad(String s) {
 }
 
 public static String ColorfyString(String message, Player p, String Action, String Char) {
+	message=message.replace("&x", "");
 for(String key: grads.keySet()) {
 	boolean pn=p!=null;
 	if(pn && !(p.hasPermission("tcg."+Action+"."+key)))

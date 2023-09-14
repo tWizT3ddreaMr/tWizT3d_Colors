@@ -31,13 +31,7 @@
             <version>1.19.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.Aust1n46.VentureChat</groupId>
-            <artifactId>VentureChat</artifactId>
-            <scope>system</scope>
-            <version>any</version>
-            <systemPath>C:/dependencies/VentureChat.jar</systemPath>
-        </dependency>
+       
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>

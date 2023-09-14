@@ -1,7 +1,6 @@
  package me.tWizT3d_dreaMr.colors;
 
  import me.tWizT3d_dreaMr.colors.Listeners.Chat;
-import me.tWizT3d_dreaMr.colors.Listeners.Chat2;
 import me.tWizT3d_dreaMr.colors.Listeners.Commands;
  import me.tWizT3d_dreaMr.colors.Listeners.Stations.Anvil;
  import me.tWizT3d_dreaMr.colors.Listeners.Stations.Signs;
@@ -54,12 +53,7 @@ public void onEnable() {
 	if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 		new Expansion(this).register();
 	}
-	if(Bukkit.getPluginManager().getPlugin("VentureChat") != null) {
-		Bukkit.getPluginManager().registerEvents(new Chat2(), this);
-	}
-	else {
-		Bukkit.getPluginManager().registerEvents(new Chat(), this);
-	}
+	Bukkit.getPluginManager().registerEvents(new Chat(), this);
 	OFilter.addAll(config.getStringList("OtherFilter.Filtered"));
 	FFilter.addAll(config.getStringList("FormatFilter.Filtered"));
 	bOFilter=config.getBoolean("OtherFilter.Enable");
