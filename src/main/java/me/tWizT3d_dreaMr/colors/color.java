@@ -145,15 +145,12 @@ for(String key: grads.keySet()) {
 
 		if(hxs2[0].equalsIgnoreCase("#random")) {
 			hxs2[0]="#"+randomHexString();
-			System.out.println(hxs2[0].replace("#", ""));
 		}
 		if(hxs2[1].equalsIgnoreCase("#random")) {
 			hxs2[1]="#"+randomHexString();
-			System.out.println(hxs2[1].replace("#", ""));
 		}
 		message=beg+gradientItem.gradString(hxs2, message);
 		if(hxs[1].equalsIgnoreCase("#random")) 
-			System.out.println(message);
 	}
 }
 for(String key: colors.keySet()) {
