@@ -150,7 +150,9 @@ for(String key: grads.keySet()) {
 			hxs2[1]="#"+randomHexString();
 		}
 		message=beg+gradientItem.gradString(hxs2, message);
-		if(hxs[1].equalsIgnoreCase("#random")) 
+		if(hxs[1].equalsIgnoreCase("#random")) {
+			
+		}
 	}
 }
 for(String key: colors.keySet()) {

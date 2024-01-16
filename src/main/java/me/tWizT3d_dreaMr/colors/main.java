@@ -13,6 +13,7 @@ import me.tWizT3d_dreaMr.colors.Listeners.Commands;
  import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
  
  public class main extends org.bukkit.plugin.java.JavaPlugin
@@ -123,6 +124,12 @@ if(command.getName().equalsIgnoreCase("setcolor")) {
 		}
 		if(args.length==2) {
 			if(args[0].equalsIgnoreCase("set")) {
+				List def = Arrays.asList("a","b","0","z","l","k","m","n","o");
+				
+				if((!p.hasPermission("tco.woo") && def.contains(args[1]))) {
+					p.sendMessage(color.ColorfyString("!cYou cannot set your color to !"+args[1]+"this color",null,null,"!"));
+						return true;
+				}
 				if(color.isColor(args[1])) {
 					if(!p.hasPermission("tc2.color."+args[1])) {
 						p.sendMessage(color.ColorfyString("!cYou cannot set your color to !"+args[1]+"this color",null,null,"!"));
