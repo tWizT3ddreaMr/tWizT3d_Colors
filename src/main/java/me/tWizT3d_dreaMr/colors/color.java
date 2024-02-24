@@ -78,7 +78,7 @@ return ChatColor.of(hex);
 	
 }
 public static String randomHexString() {
-String characters ="abcdef1234567890";
+String characters ="abcdef789";
 StringBuilder hex= new StringBuilder();
 while(hex.length()!=6){
 	int r=random(characters.length());
