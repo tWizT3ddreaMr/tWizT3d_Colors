@@ -15,7 +15,7 @@ public class color {
 private static HashMap<String, ChatColor> colors;
 private static HashMap<String, String[]> grads;
 public static void addColor(String key, String hex) {
-if(hex.equalsIgnoreCase("random")) {
+if(hex.equalsIgnoreCase("random") || hex.equalsIgnoreCase("landom")) {
 	colors.put(key, null);
 }
 key= key.replace("&", "");
@@ -38,7 +38,10 @@ hex2= hexs.substring(0,6);
 hexs= hexs.substring(6);
 hexs="#"+hexs;
 hex2="#"+hex2;
-if((Formatter.isHex("&"+hexs)||hexs.equalsIgnoreCase("#random"))&&(Formatter.isHex("&"+hex2)||hexs.equalsIgnoreCase("#random"))) {
+if((Formatter.isHex("&"+hexs) ||
+		(hexs.equalsIgnoreCase("#random") || hexs.equalsIgnoreCase("#landom")))
+		&&(Formatter.isHex("&"+hex2) ||
+		(hexs.equalsIgnoreCase("#random") || hexs.equalsIgnoreCase("#landom")))) {
 	String[] end= new String[] {hex2, hexs};
 	grads.put(key, end);
 } 
@@ -56,8 +59,10 @@ public static ArrayList<String> getGrads(String key) {
 	String[] get=grads.get(key);
 	ArrayList<String> ret= new ArrayList<>();
 	for(String s:get) {
-		if(s.equalsIgnoreCase("#random")) 
+		if(s.equalsIgnoreCase("#random"))
 			s="#"+randomHexString();
+		if(s.equalsIgnoreCase("#landom"))
+			s="#"+randomLightHexString();
 		ret.add(s);
 		}
 	return ret;
@@ -72,24 +77,42 @@ Color c= get.getColor();
 
 return "#"+Integer.toHexString(c.getRed())+Integer.toHexString(c.getGreen())+Integer.toHexString(c.getBlue());
 }
-public static ChatColor randomColor() {
-String hex="#"+randomHexString();
-return ChatColor.of(hex);
-	
-}
-public static String randomHexString() {
-String characters ="abcdef789";
-StringBuilder hex= new StringBuilder();
-while(hex.length()!=6){
-	int r=random(characters.length());
-		if(r!=characters.length())
-			hex.append(characters.charAt(r));
-		else
-			hex.append(characters.substring(r));
-}
-return hex.toString();
-	
-}
+	public static ChatColor randomColor() {
+		String hex="#"+randomHexString();
+		return ChatColor.of(hex);
+
+	}
+	public static ChatColor randomLColor() {
+		String hex="#"+randomLightHexString();
+		return ChatColor.of(hex);
+
+	}
+	public static String randomHexString() {
+		String characters ="abcdef1234567890";
+		StringBuilder hex= new StringBuilder();
+		while(hex.length()!=6){
+			int r=random(characters.length());
+			if(r!=characters.length())
+				hex.append(characters.charAt(r));
+			else
+				hex.append(characters.substring(r));
+		}
+		return hex.toString();
+
+	}
+    public static String randomLightHexString() {
+        String characters ="abcdef6789";
+        StringBuilder hex= new StringBuilder();
+        while(hex.length()!=6){
+            int r=random(characters.length());
+            if(r!=characters.length())
+                hex.append(characters.charAt(r));
+            else
+                hex.append(characters.substring(r));
+        }
+        return hex.toString();
+
+    }
 
 private static int random(int x){
 Random randomGenerator = new Random();
@@ -149,10 +172,13 @@ for(String key: grads.keySet()) {
 		if(hxs2[1].equalsIgnoreCase("#random")) {
 			hxs2[1]="#"+randomHexString();
 		}
-		message=beg+gradientItem.gradString(hxs2, message);
-		if(hxs[1].equalsIgnoreCase("#random")) {
-			
+		if(hxs2[0].equalsIgnoreCase("#landom")) {
+			hxs2[0]="#"+randomLightHexString();
 		}
+		if(hxs2[1].equalsIgnoreCase("#landom")) {
+			hxs2[1]="#"+randomLightHexString();
+		}
+		message=beg+gradientItem.gradString(hxs2, message);
 	}
 }
 for(String key: colors.keySet()) {
